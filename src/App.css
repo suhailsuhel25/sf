@@ -1,38 +1,142 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Navbar gradient: merah ke pink ke oranye */
+.navbar-gradient {
+  background: linear-gradient(90deg, #ff1749 0%, #ff6a00 50%, #ff2eb2 100%);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Tombol gradient: kuning ke oranye */
+.btn-gradient {
+  background: linear-gradient(90deg, #ffe259 0%, #ffa751 100%);
+  color: #1f2937;
+  /* gray-800 */
 }
 
-.App-link {
-  color: #61dafb;
+/* HAPUS hover/focus pada navbar li */
+.navbar-gradient ul>li {
+  border-radius: 8px;
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Harmonious hover effect for nav links and button */
+a,
+.daftar-btn {
+  text-decoration: none;
+  position: relative;
+  border-radius: 5px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+a::before,
+a::after,
+.daftar-btn::before,
+.daftar-btn::after {
+  content: "";
+  position: absolute;
+  background-color: rgba(255, 106, 0, 0.12);
+  /* oranye transparan */
+  width: 0%;
+  height: 100%;
+  top: 0;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+a::before,
+.daftar-btn::before {
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+}
+
+a::after,
+.daftar-btn::after {
+  right: 50%;
+  transform: translateX(50%);
+  border-radius: 5px;
+}
+
+a:hover::before,
+a:hover::after,
+.daftar-btn:hover::before,
+.daftar-btn:hover::after,
+a:focus::before,
+a:focus::after,
+.daftar-btn:focus::before,
+.daftar-btn:focus::after {
+  width: 100%;
+}
+
+.nav-link {
+  color: #fff;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:active {
+  color: #fff !important;
+  background: none !important;
+  -webkit-text-fill-color: #fff !important;
+  text-fill-color: #fff !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.daftar-btn {
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  color: #1f2937;
+  /* gray-800 */
+  background: linear-gradient(45deg, #fff6b7 0%, #ff6a00 100%);
+}
+
+.daftar-btn:hover,
+.daftar-btn:focus {
+  background: linear-gradient(45deg, #fff6b7 0%, #f6416c 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px 0 rgba(255, 46, 178, 0.15);
+}
+
+/* Custom orange scrollbar styles */
+::-webkit-scrollbar {
+  width: 12px;
+  background: #fff7ed; /* light orange background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ff9800 0%, #ff6a00 100%);
+  border-radius: 8px;
+  border: 2px solid #fff7ed;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ffb347 0%, #f6416c 100%);
+}
+
+::-webkit-scrollbar-corner {
+  background: #fff7ed;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ff9800 #fff7ed;
 }
