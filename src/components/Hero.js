@@ -103,7 +103,7 @@ const HeroTitle = memo(() => (
         SWITCHFEST
       </span>
       <span className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight bg-gradient-to-r from-orange-500 via-pink-500 to-yellow-300 bg-clip-text text-transparent mt-1 block">
-        2024
+        2025
       </span>
     </h1>
   </div>
