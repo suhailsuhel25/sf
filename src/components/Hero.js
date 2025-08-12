@@ -1,136 +1,208 @@
 import React, { useEffect, useState, memo, useCallback } from 'react';
 import PopupButton from './PopupButton';
 
-// Decorative background components
-const Trophy = memo(() => (
-  <div className="absolute top-[-8px] left-4 md:top-8 md:left-8">
-    <div className="relative">
-      <div
-        className="flex items-center justify-center w-[85px] h-[105px] md:w-[185px] md:h-[235px]"
-        style={{
-          transform: 'rotate(26.37deg)',
-          transformOrigin: 'center center',
-        }}
-      >
-        <img
-          src="/images/Cup.png"
-          alt="Trophy"
-          className="w-full h-full object-contain drop-shadow-lg"
-          style={{ transform: 'rotate(-26.37deg)' }}
-        />
-      </div>
-      <div
-        className="absolute bottom-1 md:bottom-5 left-[70%]"
-        style={{
-          transform: 'translateX(-47.5%) rotate(-26.37deg)',
-        }}
-      >
-        <p className="text-[7px] md:text-xs font-medium text-gray-800 whitespace-nowrap text-center">
-          Top Event Teknologi
-        </p>
-        <p className="text-[7px] md:text-xs text-gray-700 text-center">
-          Informasi
-        </p>
+// Helper for dynamic animation
+const useAnimatedMount = (delay = 0, from = {}, to = {}) => {
+  const [style, setStyle] = useState(from);
+  useEffect(() => {
+    const timeout = setTimeout(() => setStyle(to), delay);
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line
+  }, []);
+  return style;
+};
+
+// Decorative background components with more dynamic entrance
+const Trophy = memo(() => {
+  const style = useAnimatedMount(
+    200,
+    { opacity: 0, transform: 'translateY(-40px) scale(0.8) rotate(-20deg)' },
+    { opacity: 1, transform: 'translateY(0) scale(1) rotate(0deg)', transition: 'all 1.2s cubic-bezier(.68,-0.55,.27,1.55)' }
+  );
+  return (
+    <div className="absolute top-[-8px] left-4 md:top-8 md:left-8" style={style}>
+      <div className="relative">
+        <div
+          className="flex items-center justify-center w-[85px] h-[105px] md:w-[185px] md:h-[235px]"
+          style={{
+            transform: 'rotate(26.37deg)',
+            transformOrigin: 'center center',
+          }}
+        >
+          <img
+            src="/images/Cup.png"
+            alt="Trophy"
+            className="w-full h-full object-contain drop-shadow-lg"
+            style={{ transform: 'rotate(-26.37deg)' }}
+          />
+        </div>
+        <div
+          className="absolute bottom-1 md:bottom-5 left-[70%]"
+          style={{
+            transform: 'translateX(-47.5%) rotate(-26.37deg)',
+          }}
+        >
+          <p className="text-[7px] md:text-xs font-medium text-gray-800 whitespace-nowrap text-center">
+            Top Event Teknologi
+          </p>
+          <p className="text-[7px] md:text-xs text-gray-700 text-center">
+            Informasi
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-));
+  );
+});
 
-const Stars = memo(() => (
-  <div className="absolute top-[45%] right-2 md:top-auto md:bottom-32 md:left-32 md:right-auto">
-    <img
-      src="/images/Stars.png"
-      alt="Stars"
-      className="w-20 h-20 md:w-40 md:h-40 object-contain drop-shadow-lg"
-    />
-  </div>
-));
+const Stars = memo(() => {
+  const style = useAnimatedMount(
+    400,
+    { opacity: 0, transform: 'scale(0.7) rotate(-30deg)' },
+    { opacity: 1, transform: 'scale(1) rotate(0deg)', transition: 'all 1.1s cubic-bezier(.68,-0.55,.27,1.55)' }
+  );
+  return (
+    <div className="absolute top-[45%] right-2 md:top-auto md:bottom-32 md:left-32 md:right-auto" style={style}>
+      <img
+        src="/images/Stars.png"
+        alt="Stars"
+        className="w-20 h-20 md:w-40 md:h-40 object-contain drop-shadow-lg"
+      />
+    </div>
+  );
+});
 
-const OrangeVector1 = memo(() => (
-  <div className="absolute right-[-80px] md:right-[-120px] top-[60%] transform -translate-y-1/2 hidden lg:block w-[650px] h-[650px] z-0">
-    <div className="w-full h-full bg-gradient-to-br from-orange-400 via-red-500 to-pink-500 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] opacity-80 blur-sm animate-pulse"></div>
-    <div className="absolute inset-4 bg-gradient-to-br from-orange-300 via-red-400 to-pink-400 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] opacity-60 transform scale-75 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-    <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-yellow-300 rounded-full opacity-70 animate-bounce"></div>
-    <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-orange-300 rounded-full opacity-60 animate-bounce" style={{ animationDelay: '0.3s' }}></div>
-    <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-pink-300 rounded-full opacity-80 animate-bounce" style={{ animationDelay: '0.7s' }}></div>
-  </div>
-));
+const OrangeVector1 = memo(() => {
+  const style = useAnimatedMount(
+    600,
+    { opacity: 0, transform: 'translateY(60px) scale(0.7) rotate(-10deg)' },
+    { opacity: 1, transform: 'translateY(0) scale(1) rotate(0deg)', transition: 'all 1.3s cubic-bezier(.68,-0.55,.27,1.55)' }
+  );
+  return (
+    <div className="absolute right-[-80px] md:right-[-120px] top-[60%] transform -translate-y-1/2 hidden lg:block w-[650px] h-[650px] z-0" style={style}>
+      <div className="w-full h-full bg-gradient-to-br from-orange-400 via-red-500 to-pink-500 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] opacity-80 blur-sm animate-pulse"></div>
+      <div className="absolute inset-4 bg-gradient-to-br from-orange-300 via-red-400 to-pink-400 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] opacity-60 transform scale-75 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+      <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-yellow-300 rounded-full opacity-70 animate-bounce"></div>
+      <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-orange-300 rounded-full opacity-60 animate-bounce" style={{ animationDelay: '0.3s' }}></div>
+      <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-pink-300 rounded-full opacity-80 animate-bounce" style={{ animationDelay: '0.7s' }}></div>
+    </div>
+  );
+});
 
-const OrangeVector2 = memo(() => (
-  <div
-    className="absolute top-[-117px] right-[-205px] w-[650px] h-[650px] hidden lg:block z-10"
-    style={{ transform: 'rotate(-12deg)' }}
-  >
-    <div className="w-full h-full bg-gradient-to-br from-orange-500 via-red-600 to-pink-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] opacity-70 blur-sm animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-    <div className="absolute inset-8 bg-gradient-to-br from-orange-400 via-red-500 to-pink-500 rounded-[70%_30%_30%_70%/60%_40%_60%_40%] opacity-50 transform scale-80 animate-pulse" style={{ animationDelay: '0.8s' }}></div>
-    <div className="absolute top-1/3 right-1/3 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 transform rotate-45 opacity-80 animate-spin" style={{ animationDuration: '8s' }}></div>
-    <div className="absolute bottom-1/3 left-1/3 w-4 h-4 bg-gradient-to-br from-pink-400 to-red-500 transform rotate-45 opacity-70 animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }}></div>
-  </div>
-));
+const OrangeVector2 = memo(() => {
+  const style = useAnimatedMount(
+    800,
+    { opacity: 0, transform: 'translateX(100px) scale(0.7) rotate(-30deg)' },
+    { opacity: 1, transform: 'translateX(0) scale(1) rotate(-12deg)', transition: 'all 1.2s cubic-bezier(.68,-0.55,.27,1.55)' }
+  );
+  return (
+    <div
+      className="absolute top-[-117px] right-[-205px] w-[650px] h-[650px] hidden lg:block z-10"
+      style={style}
+    >
+      <div className="w-full h-full bg-gradient-to-br from-orange-500 via-red-600 to-pink-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] opacity-70 blur-sm animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+      <div className="absolute inset-8 bg-gradient-to-br from-orange-400 via-red-500 to-pink-500 rounded-[70%_30%_30%_70%/60%_40%_60%_40%] opacity-50 transform scale-80 animate-pulse" style={{ animationDelay: '0.8s' }}></div>
+      <div className="absolute top-1/3 right-1/3 w-6 h-6 bg-gradient-to-br from-yellow-400 to-orange-500 transform rotate-45 opacity-80 animate-spin" style={{ animationDuration: '8s' }}></div>
+      <div className="absolute bottom-1/3 left-1/3 w-4 h-4 bg-gradient-to-br from-pink-400 to-red-500 transform rotate-45 opacity-70 animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }}></div>
+    </div>
+  );
+});
 
-const OrangeVector3 = memo(() => (
-  <div
-    className="absolute top-[-80px] right-[-400px] w-[650px] h-[650px] hidden lg:block z-10"
-    style={{ transform: 'rotate(-12deg)' }}
-  >
-    <div className="w-full h-full bg-gradient-to-br from-orange-300 via-red-400 to-pink-400 rounded-[40%_60%_60%_40%/40%_40%_60%_60%] opacity-60 blur-sm animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-    <div className="absolute inset-6 bg-gradient-to-br from-orange-200 via-red-300 to-pink-300 rounded-[60%_40%_40%_60%/60%_60%_40%_40%] opacity-40 transform scale-85 animate-pulse" style={{ animationDelay: '1s' }}></div>
-    <div className="absolute top-1/2 left-1/2 w-8 h-8 border-2 border-orange-400 rounded-full opacity-60 animate-ping"></div>
-    <div className="absolute top-1/2 left-1/2 w-12 h-12 border border-yellow-400 rounded-full opacity-40 animate-ping" style={{ animationDelay: '0.5s' }}></div>
-    <div className="absolute top-1/2 left-1/2 w-16 h-16 border border-pink-400 rounded-full opacity-30 animate-ping" style={{ animationDelay: '1s' }}></div>
-  </div>
-));
+const OrangeVector3 = memo(() => {
+  const style = useAnimatedMount(
+    1000,
+    { opacity: 0, transform: 'translateX(120px) scale(0.7) rotate(-30deg)' },
+    { opacity: 1, transform: 'translateX(0) scale(1) rotate(-12deg)', transition: 'all 1.2s cubic-bezier(.68,-0.55,.27,1.55)' }
+  );
+  return (
+    <div
+      className="absolute top-[-80px] right-[-400px] w-[650px] h-[650px] hidden lg:block z-10"
+      style={style}
+    >
+      <div className="w-full h-full bg-gradient-to-br from-orange-300 via-red-400 to-pink-400 rounded-[40%_60%_60%_40%/40%_40%_60%_60%] opacity-60 blur-sm animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+      <div className="absolute inset-6 bg-gradient-to-br from-orange-200 via-red-300 to-pink-300 rounded-[60%_40%_40%_60%/60%_60%_40%_40%] opacity-40 transform scale-85 animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/2 left-1/2 w-8 h-8 border-2 border-orange-400 rounded-full opacity-60 animate-ping"></div>
+      <div className="absolute top-1/2 left-1/2 w-12 h-12 border border-yellow-400 rounded-full opacity-40 animate-ping" style={{ animationDelay: '0.5s' }}></div>
+      <div className="absolute top-1/2 left-1/2 w-16 h-16 border border-pink-400 rounded-full opacity-30 animate-ping" style={{ animationDelay: '1s' }}></div>
+    </div>
+  );
+});
 
-const StudentIllustration = memo(() => (
-  <div className="absolute right-[-10px] md:right-5 top-[45%] transform -translate-y-1/2 hidden lg:block z-10">
-    <img
-      src="/images/orang-1.png"
-      alt="Student"
-      className="w-[220px] md:w-[300px] lg:w-[350px] h-auto drop-shadow-lg"
-      style={{ transform: 'scaleX(-1)' }}
-    />
-  </div>
-));
+const StudentIllustration = memo(() => {
+  const style = useAnimatedMount(
+    1200,
+    { opacity: 0, transform: 'translateY(60px) scale(0.7) rotate(10deg)' },
+    { opacity: 1, transform: 'translateY(0) scale(1) rotate(0deg)', transition: 'all 1.2s cubic-bezier(.68,-0.55,.27,1.55)' }
+  );
+  return (
+    <div className="absolute right-[-10px] md:right-5 top-[45%] transform -translate-y-1/2 hidden lg:block z-10" style={style}>
+      <img
+        src="/images/orang-1.png"
+        alt="Student"
+        className="w-[220px] md:w-[300px] lg:w-[350px] h-auto drop-shadow-lg"
+        style={{ transform: 'scaleX(-1)' }}
+      />
+    </div>
+  );
+});
 
 // Title, subtitle, actions, and countdown
-const HeroTitle = memo(() => (
-  <div className="mt-[-40px] sm:mt-[-60px] md:mt-[-80px] lg:mt-[-100px] flex flex-col items-center text-center w-full px-2">
-    <h1 className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-extrabold mb-1 tracking-wide text-orange-500">
-      WELCOME TO
-    </h1>
-    <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold mb-1 leading-tight flex flex-col items-center">
-      <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-yellow-300 bg-clip-text text-transparent block font-extrabold">
-        SWITCHFEST
-      </span>
-      <span className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight bg-gradient-to-r from-orange-500 via-pink-500 to-yellow-300 bg-clip-text text-transparent mt-1 block">
-        2025
-      </span>
-    </h1>
-  </div>
-));
+const HeroTitle = memo(() => {
+  const style = useAnimatedMount(
+    200,
+    { opacity: 0, transform: 'translateY(-40px) scale(0.95) skewY(-4deg)' },
+    { opacity: 1, transform: 'translateY(0) scale(1) skewY(0deg)', transition: 'all 1.1s cubic-bezier(.68,-0.55,.27,1.55)' }
+  );
+  return (
+    <div className="mt-[-40px] sm:mt-[-60px] md:mt-[-80px] lg:mt-[-100px] flex flex-col items-center text-center w-full px-2" style={style}>
+      <h1 className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-extrabold mb-1 tracking-wide text-orange-500">
+        WELCOME TO
+      </h1>
+      <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold mb-1 leading-tight flex flex-col items-center">
+        <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-yellow-300 bg-clip-text text-transparent block font-extrabold animate-gradient-move">
+          SWITCHFEST
+        </span>
+        <span className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight bg-gradient-to-r from-orange-500 via-pink-500 to-yellow-300 bg-clip-text text-transparent mt-1 block animate-gradient-move">
+          2025
+        </span>
+      </h1>
+    </div>
+  );
+});
 
-const HeroSubtitle = memo(() => (
-  <p className="text-base sm:text-lg md:text-xl text-gray-800 mb-6 sm:mb-8 font-medium max-w-xs sm:max-w-lg md:max-w-2xl mx-auto px-2 sm:px-0 leading-snug sm:leading-normal">
-    Empowering Students, <br className="block sm:hidden" />
-    Shaping Digital Tomorrow
-  </p>
-));
+const HeroSubtitle = memo(() => {
+  const style = useAnimatedMount(
+    500,
+    { opacity: 0, transform: 'translateY(30px) scale(0.95)' },
+    { opacity: 1, transform: 'translateY(0) scale(1)', transition: 'all 1.1s cubic-bezier(.68,-0.55,.27,1.55)' }
+  );
+  return (
+    <p className="text-base sm:text-lg md:text-xl text-gray-800 mb-6 sm:mb-8 font-medium max-w-xs sm:max-w-lg md:max-w-2xl mx-auto px-2 sm:px-0 leading-snug sm:leading-normal" style={style}>
+      Empowering Students, <br className="block sm:hidden" />
+      Shaping Digital Tomorrow
+    </p>
+  );
+});
 
 const HeroActions = memo(({ setShowDaftar, setShowJuklak }) => {
+  const style = useAnimatedMount(
+    800,
+    { opacity: 0, transform: 'scale(0.8) translateY(40px)' },
+    { opacity: 1, transform: 'scale(1) translateY(0)', transition: 'all 1.1s cubic-bezier(.68,-0.55,.27,1.55)' }
+  );
   const handleDaftar = useCallback(() => setShowDaftar(true), [setShowDaftar]);
   const handleJuklak = useCallback(() => setShowJuklak(true), [setShowJuklak]);
 
   return (
-    <div className="flex flex-row gap-3 justify-center items-center">
+    <div className="flex flex-row gap-3 justify-center items-center" style={style}>
       <button
-        className="daftar-btn w-32 h-10 sm:w-44 sm:h-12 bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-semibold rounded-lg text-sm sm:text-base px-4 lg:px-7 py-2 shadow-md flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300"
+        className="daftar-btn w-32 h-10 sm:w-44 sm:h-12 bg-yellow-400 hover:bg-yellow-500 text-gray-800 font-semibold rounded-lg text-sm sm:text-base px-4 lg:px-7 py-2 shadow-md flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 animate-pop"
         onClick={handleDaftar}
       >
         Daftar
       </button>
       <button
         className="w-32 h-10 sm:w-44 sm:h-12 bg-gradient-to-r from-orange-100 via-yellow-100 to-pink-100 border-2 border-orange-500 text-orange-500 font-semibold rounded-lg text-sm sm:text-base px-4 lg:px-7 py-2 shadow-md flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300 relative overflow-hidden group
-        hover:bg-yellow-500 hover:text-gray-800 hover:border-transparent hover:scale-105 hover:shadow-lg"
+        hover:bg-yellow-500 hover:text-gray-800 hover:border-transparent hover:scale-105 hover:shadow-lg animate-pop"
         onClick={handleJuklak}
       >
         <span className="relative z-10">Juklak-Juknis</span>
@@ -167,6 +239,33 @@ const CountdownTimer = memo(() => {
     return () => clearInterval(timer);
   }, []);
 
+  // Animate each block with staggered delay
+  const blockDelays = [0, 120, 240, 360];
+
+  // Move useAnimatedMount out of map to avoid hook-in-callback
+  const blockStyles = [
+    useAnimatedMount(
+      1000 + blockDelays[0],
+      { opacity: 0, transform: 'scale(0.7) translateY(30px)' },
+      { opacity: 1, transform: 'scale(1) translateY(0)', transition: 'all 1s cubic-bezier(.68,-0.55,.27,1.55)' }
+    ),
+    useAnimatedMount(
+      1000 + blockDelays[1],
+      { opacity: 0, transform: 'scale(0.7) translateY(30px)' },
+      { opacity: 1, transform: 'scale(1) translateY(0)', transition: 'all 1s cubic-bezier(.68,-0.55,.27,1.55)' }
+    ),
+    useAnimatedMount(
+      1200 + blockDelays[2],
+      { opacity: 0, transform: 'scale(0.7) translateY(30px)' },
+      { opacity: 1, transform: 'scale(1) translateY(0)', transition: 'all 1s cubic-bezier(.68,-0.55,.27,1.55)' }
+    ),
+    useAnimatedMount(
+      1200 + blockDelays[3],
+      { opacity: 0, transform: 'scale(0.7) translateY(30px)' },
+      { opacity: 1, transform: 'scale(1) translateY(0)', transition: 'all 1s cubic-bezier(.68,-0.55,.27,1.55)' }
+    ),
+  ];
+
   const timeBlocks = [
     {
       label: 'Days',
@@ -201,10 +300,11 @@ const CountdownTimer = memo(() => {
   return (
     <div className="flex flex-wrap gap-4 mt-12 justify-center items-center max-w-md mx-auto">
       <div className="flex w-full sm:w-auto justify-center gap-4">
-        {timeBlocks.slice(0, 2).map(({ label, value, bg, text, labelText }) => (
+        {timeBlocks.slice(0, 2).map(({ label, value, bg, text, labelText }, idx) => (
           <div
             key={label}
             className={`${bg} rounded-lg p-4 text-center w-24 h-24 flex flex-col justify-center items-center shadow-lg mb-0`}
+            style={blockStyles[idx]}
           >
             <div className={`text-2xl md:text-3xl font-bold ${text}`}>{value}</div>
             <div className={`text-sm ${labelText}`}>{label}</div>
@@ -212,10 +312,11 @@ const CountdownTimer = memo(() => {
         ))}
       </div>
       <div className="flex w-full sm:w-auto justify-center gap-4">
-        {timeBlocks.slice(2).map(({ label, value, bg, text, labelText }) => (
+        {timeBlocks.slice(2).map(({ label, value, bg, text, labelText }, idx) => (
           <div
             key={label}
             className={`${bg} rounded-lg p-4 text-center w-24 h-24 flex flex-col justify-center items-center shadow-lg mt-0`}
+            style={blockStyles[idx + 2]}
           >
             <div className={`text-2xl md:text-3xl font-bold ${text}`}>{value}</div>
             <div className={`text-sm ${labelText}`}>{label}</div>
@@ -230,11 +331,6 @@ const CountdownTimer = memo(() => {
 const Hero = () => {
   const [showDaftar, setShowDaftar] = useState(false);
   const [showJuklak, setShowJuklak] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const popupDaftarItems = [
     { nama: "Lomba 1", link: "/form/daftar-lomba-1" },
@@ -248,38 +344,24 @@ const Hero = () => {
     { nama: "Juklak 3", link: "/juklak-3" },
   ];
 
-  const fadeIn = (delay) =>
-    `transition-opacity duration-1500 ease-out delay-${delay} ${isMounted ? 'opacity-100' : 'opacity-0'}`;
-
-  const fadeInContent = (delay) =>
-    `transition-all duration-1000 delay-${delay} ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`;
-
   return (
     <section className="relative h-screen flex flex-col justify-center items-center px-4 md:px-20 pt-16 md:pt-32 overflow-hidden bg-gradient-to-br from-orange-100 via-orange-200 to-orange-300">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className={fadeIn(200)}><Trophy /></div>
-        <div className={fadeIn(300)}><Stars /></div>
-        <div className={fadeIn(400)}><OrangeVector1 /></div>
-        <div className={fadeIn(500)}><OrangeVector2 /></div>
-        <div className={fadeIn(600)}><OrangeVector3 /></div>
-        <div className={fadeIn(700)}><StudentIllustration /></div>
+        <Trophy />
+        <Stars />
+        <OrangeVector1 />
+        <OrangeVector2 />
+        <OrangeVector3 />
+        <StudentIllustration />
       </div>
 
-      {/* Main content with fade-in animation */}
-      <div className={`relative z-10 text-center max-w-3xl mx-auto ${fadeInContent(0)}`}>
-        <div className={fadeInContent(100)}>
-          <HeroTitle />
-        </div>
-        <div className={fadeInContent(300)}>
-          <HeroSubtitle />
-        </div>
-        <div className={fadeInContent(500)}>
-          <HeroActions setShowDaftar={setShowDaftar} setShowJuklak={setShowJuklak} />
-        </div>
-        <div className={fadeInContent(700)}>
-          <CountdownTimer />
-        </div>
+      {/* Main content with dynamic animation */}
+      <div className="relative z-10 text-center max-w-3xl mx-auto">
+        <HeroTitle />
+        <HeroSubtitle />
+        <HeroActions setShowDaftar={setShowDaftar} setShowJuklak={setShowJuklak} />
+        <CountdownTimer />
       </div>
 
       {/* Popups */}
@@ -295,6 +377,26 @@ const Hero = () => {
         label="Juklak-Juknis"
         items={popupJuklakItems}
       />
+      {/* Custom keyframes for gradient text and pop effect */}
+      <style>{`
+        @keyframes gradient-move {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-move {
+          background-size: 200% 200%;
+          animation: gradient-move 3s ease-in-out infinite;
+        }
+        @keyframes pop {
+          0% { transform: scale(0.8); }
+          60% { transform: scale(1.08); }
+          100% { transform: scale(1); }
+        }
+        .animate-pop {
+          animation: pop 0.7s cubic-bezier(.68,-0.55,.27,1.55) both;
+        }
+      `}</style>
     </section>
   );
 };
