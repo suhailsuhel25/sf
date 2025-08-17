@@ -6,6 +6,7 @@ import Category from "./components/Category";
 import Timeline from "./components/Timeline";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Sponsor from "./components/Sponsor";
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,6 +19,7 @@ const App = () => {
       <Category />
       <Timeline />
       <Contact />
+      <Sponsor />
       <Footer />
     </div>
   );
