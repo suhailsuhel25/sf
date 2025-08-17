@@ -258,7 +258,8 @@ const CountdownTimer = memo(() => {
     updateTimer();
     const timer = setInterval(updateTimer, 1000);
     return () => clearInterval(timer);
-  }, []); // Remove dependencies to silence eslint warning
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startDate, endDate]); // Add startDate and endDate as dependencies
 
   // Animate each block with staggered delay
   const blockDelays = [0, 120, 240, 360];
