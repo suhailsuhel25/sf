@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 
 // Cara pakai:
 // Di halaman lain:
@@ -16,27 +17,32 @@ const PopupButton = ({ showModal, setShowModal, label = "Pilih", items = [] }) =
       }
     }
     if (showModal) {
-      document.body.style.overflow = "hidden";
+      // Jangan disable scroll pada body
       document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.body.style.overflow = "auto";
     }
     return () => {
-      document.body.style.overflow = "auto";
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showModal, setShowModal]);
 
   if (!showModal) return null;
 
-  return (
-    <div className="fixed inset-0 z-[999] flex items-center justify-center">
+  // Ensure the modal-root exists in the HTML
+  let modalRoot = document.getElementById("modal-root");
+  if (!modalRoot) {
+    modalRoot = document.createElement("div");
+    modalRoot.setAttribute("id", "modal-root");
+    document.body.appendChild(modalRoot);
+  }
+
+  const modalContent = (
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center pointer-events-none">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40 transition-opacity" />
+      <div className="absolute inset-0 bg-black/40 transition-opacity z-[99998] pointer-events-auto" />
       {/* Modal di tengah layar */}
       <div
         ref={modalRef}
-        className="bg-white rounded-2xl shadow-2xl p-8 max-w-xs w-full relative animate-fade-in flex flex-col items-center"
+        className="bg-white rounded-2xl shadow-2xl p-8 max-w-xs w-full relative animate-fade-in flex flex-col items-center z-[100000] pointer-events-auto"
         style={{ transform: 'translate(0, 0)' }}
       >
         <button
@@ -63,6 +69,8 @@ const PopupButton = ({ showModal, setShowModal, label = "Pilih", items = [] }) =
       </div>
     </div>
   );
+
+  return ReactDOM.createPortal(modalContent, modalRoot);
 };
 
 export default PopupButton;

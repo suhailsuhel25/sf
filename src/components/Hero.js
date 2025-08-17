@@ -333,15 +333,15 @@ const Hero = () => {
   const [showJuklak, setShowJuklak] = useState(false);
 
   const popupDaftarItems = [
-    { nama: "Lomba 1", link: "/form/daftar-lomba-1" },
-    { nama: "Lomba 2", link: "/form/daftar-lomba-2" },
-    { nama: "Lomba 3", link: "/form/daftar-lomba-3" },
+    { nama: "Web Development", link: "https://bit.ly/WebDevelopment_SwitchFest2025" },
+    { nama: "UI/UX Design", link: "https://bit.ly/UIUX-Design_SwitchFest2025" },
+    { nama: "Design Poster", link: "https://bit.ly/Poster_SwitchFest2025" },
   ];
 
   const popupJuklakItems = [
-    { nama: "Juklak 1", link: "/juklak-1" },
-    { nama: "Juklak 2", link: "/juklak-2" },
-    { nama: "Juklak 3", link: "/juklak-3" },
+    { nama: "Juklak Web Development", link: "https://drive.google.com/file/d/1rV78hl8eH_G8Xsesh2GYKeZdtcZ1PWE8/view?usp=drivesdk" },
+    { nama: "Juklak UI/UX Design", link: "https://drive.google.com/file/d/1rZTCCTislsKIVzmgR4KA3HhXURgdvR3c/view?usp=drivesdk" },
+    { nama: "Juklak Design Poster", link: "https://drive.google.com/file/d/1raJxSQHiBYjSplEpzvC3qS4P0AMl1dC8/view?usp=drivesdk" },
   ];
 
   return (
@@ -368,7 +368,7 @@ const Hero = () => {
       <PopupButton
         showModal={showDaftar}
         setShowModal={setShowDaftar}
-        label="Lomba"
+        label="Perlombaan"
         items={popupDaftarItems}
       />
       <PopupButton

@@ -1,0 +1,215 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roadmap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+    
+    .font-orbitron {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      background-color: #1a0a3a;
+      background-image: url('https://placehold.co/100x100/1a0a3a/1a0a3a?text=%20');
+      background-size: 10px 10px;
+      background-position: center;
+      background-repeat: repeat;
+      background-blend-mode: overlay;
+    }
+
+    /* Main container with glow */
+    .container-glow {
+      position: relative;
+      background: linear-gradient(180deg, #1a0a3a 0%, #2a0a4a 100%);
+      box-shadow: 0 0 40px rgba(212, 111, 255, 0.2);
+    }
+    
+    /* Inverted spotlight effect for the text content, using a gradient mask */
+    .spotlight-text-glow {
+      position: relative;
+      z-index: 1;
+      color: #d46fff;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      -webkit-mask-image: radial-gradient(ellipse at bottom, rgba(212,111,255,0.8) 0%, transparent 60%);
+      mask-image: radial-gradient(ellipse at bottom, rgba(212,111,255,0.8) 0%, transparent 60%);
+    }
+
+    /* The glowing oval at the bottom */
+    .glow-ellipse {
+      position: relative;
+      width: 120px;
+      height: 25px;
+      border-radius: 50%;
+      background: #d46fff;
+      box-shadow: 
+        0 0 10px #d46fff,
+        0 0 20px #d46fff,
+        0 0 40px #d46fff;
+      z-index: 2;
+      overflow: visible; /* Allows the overflow of the light cone */
+    }
+
+    /* Light cone effect coming from the oval, using a pseudo-element */
+    .glow-ellipse::after {
+      content: '';
+      position: absolute;
+      top: -100px; /* Position it above the oval */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 120px;
+      background: radial-gradient(ellipse at bottom, rgba(212, 111, 255, 0.2) 0%, transparent 80%);
+      filter: blur(15px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Progress bar gradient */
+    .progress-bar {
+      background: linear-gradient(90deg, #d46fff 0%, #d46fff 50%, #3a0f5f 50%, #3a0f5f 100%);
+      height: 3px;
+    }
+
+    /* Timeline vertical line */
+    .timeline-line {
+      background: linear-gradient(180deg, #d46fff 0%, #3a0f5f 100%);
+      width: 2px;
+    }
+
+    /* Custom arrow shape for buttons */
+    .btn-arrow {
+      border: 1px solid #d46fff;
+      border-radius: 0.25rem;
+      color: white;
+      font-size: 0.65rem;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(212, 111, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-arrow:hover {
+      box-shadow: 0 0 10px rgba(212, 111, 255, 0.5);
+    }
+    .btn-arrow svg {
+      stroke: #d46fff;
+      stroke-width: 2;
+      width: 0.75rem;
+      height: 0.75rem;
+    }
+
+    /* Connector lines for the timeline items */
+    .connector-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      background: #d46fff;
+      opacity: 0.3;
+      height: 100%;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="relative max-w-[900px] w-full container-glow rounded-lg p-6 md:p-10 overflow-hidden">
+
+    <!-- Header and Main Timeline Container -->
+    <div class="relative w-full text-center mb-10">
+      <h1 class="font-orbitron text-white text-3xl md:text-5xl uppercase tracking-widest opacity-20">Roadmap</h1>
+      <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+        <div class="w-[2px] h-full bg-gradient-to-b from-[#d46fff] via-[#d46fff] to-transparent" style="height: 100px;"></div>
+      </div>
+    </div>
+
+    <!-- Timeline content with 4 spotlight items horizontally spaced -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mt-6 md:mt-12 gap-y-20 md:gap-y-0">
+      
+      <!-- Item 1 -->
+      <div class="relative w-full md:w-[22%] flex flex-col items-center text-center">
+        <div class="absolute top-[-40px] w-[1px] h-[40px] connector-line bg-[#d46fff]"></div>
+        <div class="relative z-10 w-[120px] mb-2">
+          <div class="spotlight-text-glow font-orbitron text-[10px] leading-tight text-[#d46fff] mb-2">LOREM IPSUM</div>
+          <div class="text-[9px] font-light text-[#c9a9ff] leading-snug">
+            Lorem ipsum dolor sit amet consectetur. Egestas nunc non sagittis lacus turpis aliquet aenean.
+          </div>
+        </div>
+        <div class="mt-4 glow-ellipse"></div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="relative w-full md:w-[22%] flex flex-col items-center text-center">
+        <div class="absolute top-[-40px] w-[1px] h-[40px] connector-line bg-[#d46fff]"></div>
+        <div class="relative z-10 w-[120px] mb-2">
+          <div class="spotlight-text-glow font-orbitron text-[10px] leading-tight text-[#d46fff] mb-2">LOREM IPSUM</div>
+          <div class="text-[9px] font-light text-[#c9a9ff] leading-snug">
+            Lorem ipsum dolor sit amet consectetur. Egestas nunc non.
+          </div>
+        </div>
+        <div class="mt-4 glow-ellipse"></div>
+      </div>
+      
+      <!-- Item 3 -->
+      <div class="relative w-full md:w-[22%] flex flex-col items-center text-center">
+        <div class="absolute top-[-40px] w-[1px] h-[40px] connector-line bg-[#d46fff]"></div>
+        <div class="relative z-10 w-[120px] mb-2">
+          <div class="spotlight-text-glow font-orbitron text-[10px] leading-tight text-[#d46fff] mb-2">LOREM IPSUM</div>
+          <div class="text-[9px] font-light text-[#c9a9ff] leading-snug">
+            Lorem ipsum dolor sit amet consectetur. Egestas nunc non.
+          </div>
+        </div>
+        <div class="mt-4 glow-ellipse"></div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="relative w-full md:w-[22%] flex flex-col items-center text-center">
+        <div class="absolute top-[-40px] w-[1px] h-[40px] connector-line bg-[#d46fff]"></div>
+        <div class="relative z-10 w-[120px] mb-2">
+          <div class="spotlight-text-glow font-orbitron text-[10px] leading-tight text-[#d46fff] mb-2">LOREM IPSUM</div>
+          <div class="text-[9px] font-light text-[#c9a9ff] leading-snug">
+            Lorem ipsum dolor sit amet consectetur. Egestas nunc non.
+          </div>
+        </div>
+        <div class="mt-4 glow-ellipse"></div>
+      </div>
+    </div>
+
+    <!-- Bottom controls and progress bar -->
+    <div class="flex items-center justify-between mt-12 px-4 md:px-0">
+      <!-- Previous button -->
+      <button class="btn-arrow flex items-center gap-1">
+        <svg fill="none" viewBox="0 0 8 12" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M7 1L1 6L7 11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="text-[8px] font-orbitron">PREVIOUS</span>
+      </button>
+
+      <!-- Progress bar -->
+      <div class="flex-1 mx-6 h-1 rounded-full progress-bar"></div>
+
+      <!-- Next button -->
+      <button class="btn-arrow flex items-center gap-1">
+        <span class="text-[8px] font-orbitron">NEXT</span>
+        <svg fill="none" viewBox="0 0 8 12" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M1 1L7 6L1 11" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

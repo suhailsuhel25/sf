@@ -1,29 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PopupButton from "./PopupButton";
-import {
-  Star,
-  Zap,
-  Calendar,
-  Trophy,
-  Rocket,
-} from "lucide-react";
+import { Star, Zap, Calendar, Trophy, Rocket } from "lucide-react";
+import { motion } from "framer-motion"; // <-- Import motion
 
 const About = () => {
   const [showDaftar, setShowDaftar] = useState(false);
   const PARTICLE_COUNT = 14;
   const [particles, setParticles] = useState([]);
-
-  useEffect(() => {
-    // Removed unused mousePosition and scrollY state
-    // and their setters to fix ESLint no-unused-vars
-    // If you want to use mouse position or scrollY, add them back and use them
-    // Otherwise, this effect is not needed unless you use the values
-    // So, we can safely remove this effect if not used elsewhere
-    // (No code in this component uses mousePosition or scrollY)
-    // So, remove this effect entirely
-    // (If you want to track mouse/scroll in the future, add them back)
-    // --- Effect removed ---
-  }, []);
 
   useEffect(() => {
     const generateParticles = () =>
@@ -46,6 +29,22 @@ const About = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Definisi animasi dengan `variants`
+  const headerVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2, ease: "easeOut" } },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.7, delay: 0.4, ease: "easeOut" } },
+  };
+
+  const card2Variants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.7, delay: 0.6, ease: "easeOut" } },
+  };
+
   return (
     <section
       id="about"
@@ -60,7 +59,6 @@ const About = () => {
     >
       {/* Animated Background */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Grid overlay sama persis dengan Category.js */}
         <div
           className="absolute inset-0"
           style={{
@@ -107,7 +105,12 @@ const About = () => {
 
       <div className="container mx-auto px-6 relative z-10 w-full">
         {/* Section Header (badge, title, subtitle) */}
-        <div className="text-center mb-8">
+        <motion.div
+          className="text-center mb-8"
+          variants={headerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-orange-300 bg-white/10 shadow-md mb-4">
             <Star className="w-4 h-4 text-yellow-400 animate-pulse" />
             <span className="text-base font-semibold tracking-wide text-orange-400">
@@ -116,10 +119,7 @@ const About = () => {
           </div>
           <h2
             className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-orange-400 via-pink-500 to-yellow-400 bg-clip-text text-transparent drop-shadow-lg mb-2 tracking-tight"
-            style={{
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
+            style={{ WebkitBackgroundClip: "text", backgroundClip: "text" }}
           >
             ABOUT SWITCHFEST
           </h2>
@@ -127,15 +127,19 @@ const About = () => {
             Festival teknologi informasi terbesar, ajang inovasi, kolaborasi, dan
             inspirasi mahasiswa UIN Walisongo.
           </p>
-        </div>
+        </motion.div>
 
         {/* Card Section */}
         <div className="flex flex-col md:flex-row gap-10 max-w-6xl mx-auto min-h-[60vh] md:min-h-[70vh] h-full">
           {/* About Card */}
-          <div className="flex-[1.25] flex flex-col justify-center min-w-[340px] h-full">
+          <motion.div
+            className="flex-[1.25] flex flex-col justify-center min-w-[340px] h-full"
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <div className="relative bg-white/30 bg-gradient-to-br from-gray-900/70 via-pink-200/30 to-yellow-100/20 backdrop-blur-2xl rounded-3xl shadow-2xl border border-pink-200/40 p-8 flex flex-col h-full min-h-[16rem] md:max-h-[520px] md:h-[520px] max-h-none transition-all duration-500 group hover:scale-[1.025] hover:shadow-3xl" style={{ overflow: "visible" }}>
               <div className="absolute -top-6 right-6 w-16 h-16 bg-gradient-to-br from-pink-200 to-orange-100 rounded-full opacity-30 blur-2xl"></div>
-              {/* Animated icons */}
               <div className="absolute left-4 top-4 animate-float-slow z-10">
                 <Rocket className="w-6 h-6 text-pink-400 drop-shadow-lg animate-spin-slow" />
               </div>
@@ -160,7 +164,7 @@ const About = () => {
                     karya, serta sesi Open Talk bersama pembicara inspiratif.
                     Mengusung tema{" "}
                     <span className="italic font-bold text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 bg-clip-text">
-                      "Empowering Students, Shaping Digital Tomorrow,"
+                      "Empowering Students, Shaping Digital Tomorrow"
                     </span>{" "}
                     acara ini menjadi wadah mahasiswa untuk berinovasi,
                     berkompetisi, dan menampilkan kreativitas melalui lomba
@@ -176,7 +180,6 @@ const About = () => {
                   </p>
                 </div>
               </div>
-              {/* Custom keyframes for floating/spinning icons */}
               <style jsx="true">{`
                 @keyframes float-slow {
                   0%,
@@ -227,11 +230,15 @@ const About = () => {
                 }
               `}</style>
             </div>
-          </div>
+          </motion.div>
           {/* Video Card */}
-          <div className="flex-[1] flex flex-col items-center justify-center min-w-[320px] h-full">
+          <motion.div
+            className="flex-[1] flex flex-col items-center justify-center min-w-[320px] h-full"
+            variants={card2Variants}
+            initial="hidden"
+            animate="visible"
+          >
             <div className="relative bg-white/30 bg-gradient-to-br from-gray-900/70 via-pink-200/30 to-yellow-100/20 backdrop-blur-2xl rounded-3xl shadow-2xl border border-pink-200/40 p-8 flex flex-col items-center text-center w-full max-w-lg h-full min-h-[16rem] md:max-h-[520px] md:h-[520px] max-h-none transition-all duration-500 group hover:scale-[1.025] hover:shadow-3xl" style={{ overflow: "visible" }}>
-              {/* Date Label at the top right, small */}
               <div className="absolute top-4 right-4 z-20">
                 <div className="bg-gradient-to-r from-yellow-100 to-orange-100 border border-yellow-200 rounded-full px-3 py-1 shadow-lg backdrop-blur-sm flex items-center gap-1">
                   <Calendar className="w-3.5 h-3.5 text-orange-600" />
@@ -244,7 +251,6 @@ const About = () => {
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-gradient-to-br from-pink-400 to-orange-300 shadow-md animate-bounce">
                 <Trophy className="w-8 h-8 text-white" />
               </div>
-              {/* Animated floating icons */}
               <div className="absolute left-6 top-8 animate-float-slow z-10">
                 <Rocket className="w-7 h-7 text-pink-400 drop-shadow-lg animate-spin-slow" />
               </div>
@@ -261,7 +267,6 @@ const About = () => {
                 Mari menjadi bagian dari perjalanan digital
               </p>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl w-80 h-80 flex items-center justify-center aspect-square border-4 border-transparent p-1.5 mb-4 transition-all duration-300 group-hover:scale-105" style={{ background: "linear-gradient(135deg, #232946 40%, #f7d56e 60%, #f971d6 90%, #ff6b35 100%)", padding: "10px" }}>
-                {/* Custom keyframes for floating/spinning icons */}
                 <style jsx="true">{`
                   @keyframes float-slow {
                     0%,
@@ -323,21 +328,21 @@ const About = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   <Rocket className="w-4 h-4 animate-bounce" />
-                  Daftar
+                  Gabung Sekarang
                   <Zap className="w-4 h-4" />
                 </span>
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
         <PopupButton
           showModal={showDaftar}
           setShowModal={setShowDaftar}
-          label="Daftar"
+          label="Perlombaan"
           items={[
-            { nama: "Lomba 1", link: "/form/daftar-lomba-1" },
-            { nama: "Lomba 2", link: "/form/daftar-lomba-2" },
-            { nama: "Lomba 3", link: "/form/daftar-lomba-3" },
+            { nama: "Web Development", link: "https://bit.ly/WebDevelopment_SwitchFest2025" },
+            { nama: "UI/UX Design", link: "https://bit.ly/UIUX-Design_SwitchFest2025" },
+            { nama: "Design Poster", link: "https://bit.ly/Poster_SwitchFest2025" },
           ]}
         />
       </div>
