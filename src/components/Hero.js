@@ -214,8 +214,8 @@ const HeroActions = memo(({ setShowDaftar, setShowJuklak }) => {
 
 const CountdownTimer = memo(() => {
   // Tanggal mulai dan akhir (WIB = UTC+7)
-  const startDate = new Date('2025-08-21T00:00:00+07:00');
-  const endDate = new Date('2025-09-07T23:59:59+07:00');
+  const startDateStr = '2025-08-21T00:00:00+07:00';
+  const endDateStr = '2025-09-07T23:59:59+07:00';
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -226,6 +226,9 @@ const CountdownTimer = memo(() => {
   const [status, setStatus] = useState('before'); // before, running, ended
 
   useEffect(() => {
+    const startDate = new Date(startDateStr);
+    const endDate = new Date(endDateStr);
+
     const updateTimer = () => {
       const now = new Date();
       if (now < startDate) {
@@ -258,8 +261,7 @@ const CountdownTimer = memo(() => {
     updateTimer();
     const timer = setInterval(updateTimer, 1000);
     return () => clearInterval(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startDate, endDate]); // Add startDate and endDate as dependencies
+  }, [startDateStr, endDateStr]);
 
   // Animate each block with staggered delay
   const blockDelays = [0, 120, 240, 360];
