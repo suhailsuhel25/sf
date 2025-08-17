@@ -9,14 +9,7 @@ const Footer = () => {
       <div className="pointer-events-none absolute -top-24 -left-24 w-72 h-72 rounded-full bg-gradient-to-br from-pink-900/30 via-orange-900/20 to-transparent blur-3xl opacity-70"></div>
       <div className="pointer-events-none absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-gradient-to-tr from-yellow-700/30 via-orange-800/20 to-transparent blur-3xl opacity-60"></div>
       {/* Subtle grid pattern for texture */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          background:
-            'linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px)',
-          backgroundSize: '40px 40px'
-        }}
-      ></div>
+
       {/* Main content with a glass-like backdrop */}
       <div className="max-w-6xl mx-auto relative z-10 p-8 rounded-2xl backdrop-blur-sm bg-white/10 border border-white/20 shadow-lg shadow-black/20">
         <div className="text-center space-y-10">
@@ -60,8 +53,6 @@ const Footer = () => {
               <span className="font-medium text-white group-hover:text-white/80 transition-colors">+62 895-2968-4820</span>
             </a>
           </div>
-          {/* Divider line with glow */}
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-pink-600 to-transparent opacity-60 drop-shadow-lg"></div>
           {/* Copyright with brighter text */}
           <div className="flex flex-col md:flex-row items-center justify-between text-white text-sm font-light gap-2">
             <p className="flex items-center gap-1">
