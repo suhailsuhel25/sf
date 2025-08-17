@@ -96,7 +96,7 @@ const Timeline = () => {
   return (
     <section
       id="timeline"
-      className="min-h-screen w-full flex flex-col justify-center items-center p-8 md:p-16 overflow-hidden"
+      className="w-full min-h-screen max-h-screen flex flex-col justify-between items-center p-8 md:p-16 overflow-hidden"
       style={{
         background:
           'linear-gradient(180deg, #0a0520 0%, #1a0a3a 50%, #2a0a4a 100%)',
@@ -108,7 +108,7 @@ const Timeline = () => {
       }}
     >
       {/* Header and Main Timeline Container */}
-      <div className="relative w-full text-center mb-16 md:mb-24">
+      <div className="relative w-full text-center mb-8 md:mb-12 flex-shrink-0">
         <h1
           className="text-white text-5xl md:text-7xl lg:text-8xl uppercase tracking-widest opacity-30"
           style={{
@@ -118,7 +118,7 @@ const Timeline = () => {
         >
           Roadmap
         </h1>
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none">
           <div
             className="w-[3px] bg-gradient-to-b from-[#d46fff] via-[#d46fff] to-transparent"
             style={{ height: '150px' }}
@@ -127,14 +127,14 @@ const Timeline = () => {
       </div>
 
       {/* Timeline content with 4 spotlight items horizontally spaced */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mt-8 md:mt-16 gap-y-32 md:gap-y-0 w-full max-w-7xl mx-auto">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-y-32 md:gap-y-0 w-full max-w-7xl mx-auto flex-1">
         {TIMELINE_ITEMS.map((item, idx) => (
           <TimelineItem key={idx} title={item.title} description={item.description} />
         ))}
       </div>
 
       {/* Bottom controls and progress bar */}
-      <div className="flex items-center justify-between mt-20 md:mt-32 w-full max-w-7xl mx-auto">
+      <div className="flex items-center justify-between mt-8 md:mt-12 w-full max-w-7xl mx-auto flex-shrink-0">
         {/* Previous button */}
         <TimelineButton
           icon={

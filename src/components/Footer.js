@@ -57,7 +57,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between text-white text-sm font-light gap-2">
             <p className="flex items-center gap-1">
               © 2025 SWITCHFEST. Made with
-              <Heart className="w-4 h-4 text-red-600 animate-pulse drop-shadow-[0_0_8px_#f00]" />
+              <Heart className="w-4 h-4 text-pink-400 animate-pulse drop-shadow-[0_0_8px_#f9a8d4]" />
               for innovation
             </p>
             <p className="mt-2 md:mt-0">
