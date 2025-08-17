@@ -3,19 +3,19 @@ import '../App.css';
 
 // Navigation links data
 const NAV_LINKS = [
-  { href: '/', label: 'Beranda', icon: (
+  { href: '/', label: 'Home', icon: (
       <svg className="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
       </svg>
     )
   },
-  { href: '#about', label: 'Tentang', icon: (
+  { href: '#about', label: 'About', icon: (
       <svg className="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     )
   },
-  { href: '#category', label: 'Kategori', icon: (
+  { href: '#category', label: 'Category', icon: (
       <svg className="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
       </svg>
@@ -27,13 +27,6 @@ const NAV_LINKS = [
       </svg>
     )
   },
-  { href: 'https://wa.me/+6289529684820', label: 'Kontak', icon: (
-      <svg className="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    external: true
-  }
 ];
 
 // Modal competition links
@@ -161,7 +154,7 @@ const Navbar = () => {
         className="daftar-btn text-sm lg:text-base font-semibold px-4 lg:px-7 py-2 rounded-lg shadow-md flex items-center h-full focus:outline-none focus:ring-2 focus:ring-yellow-400 ml-4 lg:ml-8"
         onClick={handleOpenModal}
       >
-        Daftar
+        Register
       </button>
     </div>
   );
@@ -197,7 +190,7 @@ const Navbar = () => {
             className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
             onClick={handleOpenModal}
           >
-            Daftar Sekarang
+            Register Now
           </button>
         </div>
       </div>

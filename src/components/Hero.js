@@ -153,7 +153,7 @@ const HeroTitle = memo(() => {
     { opacity: 1, transform: 'translateY(0) scale(1) skewY(0deg)', transition: 'all 1.1s cubic-bezier(.68,-0.55,.27,1.55)' }
   );
   return (
-    <div className="mt-[-40px] sm:mt-[-60px] md:mt-[-80px] lg:mt-[-100px] flex flex-col items-center text-center w-full px-2" style={style}>
+    <div className="mt-[-10px] sm:mt-[-30px] md:mt-[-50px] lg:mt-[-70px] flex flex-col items-center text-center w-full px-2" style={style}>
       <h1 className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-extrabold mb-1 tracking-wide text-orange-500">
         WELCOME TO
       </h1>
@@ -213,24 +213,45 @@ const HeroActions = memo(({ setShowDaftar, setShowJuklak }) => {
 });
 
 const CountdownTimer = memo(() => {
+  // Tanggal mulai dan akhir (WIB = UTC+7)
+  const startDate = new Date('2025-08-21T00:00:00+07:00');
+  const endDate = new Date('2025-09-07T23:59:59+07:00');
+
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0
   });
+  const [status, setStatus] = useState('before'); // before, running, ended
 
   useEffect(() => {
-    const targetDate = new Date('2025-01-15T00:00:00');
     const updateTimer = () => {
-      const now = Date.now();
-      const distance = targetDate.getTime() - now;
-      if (distance > 0) {
+      const now = new Date();
+      if (now < startDate) {
+        setStatus('before');
+        setTimeLeft({
+          days: Math.floor((startDate - now) / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((startDate - now) % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)),
+          minutes: Math.floor((startDate - now) % (1000 * 60 * 60) / (1000 * 60)),
+          seconds: Math.floor((startDate - now) % (1000 * 60) / 1000)
+        });
+      } else if (now >= startDate && now <= endDate) {
+        setStatus('running');
+        const distance = endDate - now;
         setTimeLeft({
           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
           hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((distance % (1000 * 60)) / 1000)
+        });
+      } else {
+        setStatus('ended');
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
         });
       }
     };
@@ -297,32 +318,52 @@ const CountdownTimer = memo(() => {
     }
   ];
 
+  let titleText = '';
+  if (status === 'before') {
+    titleText = 'Pendaftaran Batch 1 dibuka dalam:';
+  } else if (status === 'running') {
+    titleText = 'Pendaftaran Batch 1 sedang berlangsung!';
+  } else {
+    titleText = 'Pendaftaran Batch 1 telah ditutup';
+  }
+
+  // Ubah mt-12 menjadi mt-6 agar jarak ke atas lebih kecil
   return (
-    <div className="flex flex-wrap gap-4 mt-12 justify-center items-center max-w-md mx-auto">
-      <div className="flex w-full sm:w-auto justify-center gap-4">
-        {timeBlocks.slice(0, 2).map(({ label, value, bg, text, labelText }, idx) => (
-          <div
-            key={label}
-            className={`${bg} rounded-lg p-4 text-center w-24 h-24 flex flex-col justify-center items-center shadow-lg mb-0`}
-            style={blockStyles[idx]}
-          >
-            <div className={`text-2xl md:text-3xl font-bold ${text}`}>{value}</div>
-            <div className={`text-sm ${labelText}`}>{label}</div>
-          </div>
-        ))}
+    <div className="flex flex-col items-center mt-6 max-w-md mx-auto">
+      <div className="mb-4 text-center">
+        <span className="text-base md:text-lg font-semibold text-orange-700">{titleText}</span>
       </div>
-      <div className="flex w-full sm:w-auto justify-center gap-4">
-        {timeBlocks.slice(2).map(({ label, value, bg, text, labelText }, idx) => (
-          <div
-            key={label}
-            className={`${bg} rounded-lg p-4 text-center w-24 h-24 flex flex-col justify-center items-center shadow-lg mt-0`}
-            style={blockStyles[idx + 2]}
-          >
-            <div className={`text-2xl md:text-3xl font-bold ${text}`}>{value}</div>
-            <div className={`text-sm ${labelText}`}>{label}</div>
+      {status !== 'ended' && (
+        <div className="flex flex-wrap gap-4 justify-center items-center w-full">
+          <div className="flex w-full sm:w-auto justify-center gap-4">
+            {timeBlocks.slice(0, 2).map(({ label, value, bg, text, labelText }, idx) => (
+              <div
+                key={label}
+                className={`${bg} rounded-lg p-4 text-center w-24 h-24 flex flex-col justify-center items-center shadow-lg mb-0`}
+                style={blockStyles[idx]}
+              >
+                <div className={`text-2xl md:text-3xl font-bold ${text}`}>{value}</div>
+                <div className={`text-sm ${labelText}`}>{label}</div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+          <div className="flex w-full sm:w-auto justify-center gap-4">
+            {timeBlocks.slice(2).map(({ label, value, bg, text, labelText }, idx) => (
+              <div
+                key={label}
+                className={`${bg} rounded-lg p-4 text-center w-24 h-24 flex flex-col justify-center items-center shadow-lg mt-0`}
+                style={blockStyles[idx + 2]}
+              >
+                <div className={`text-2xl md:text-3xl font-bold ${text}`}>{value}</div>
+                <div className={`text-sm ${labelText}`}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {status === 'ended' && (
+        <div className="text-lg font-bold text-red-500 mt-4">Pendaftaran telah berakhir</div>
+      )}
     </div>
   );
 });
