@@ -1,5 +1,12 @@
-import React, { useEffect, useState, memo, useCallback } from 'react';
+import React, {
+  useEffect,
+  useState,
+  memo,
+  useCallback
+}
+  from 'react';
 import PopupButton from './PopupButton';
+import '../App.css';
 
 // Helper for dynamic animation
 const useAnimatedMount = (delay = 0, from = {}, to = {}) => {
@@ -20,7 +27,7 @@ const Trophy = memo(() => {
     { opacity: 1, transform: 'translateY(0) scale(1) rotate(0deg)', transition: 'all 1.2s cubic-bezier(.68,-0.55,.27,1.55)' }
   );
   return (
-    <div className="absolute top-[-8px] left-4 md:top-8 md:left-8" style={style}>
+    <div className="absolute top-[-8px] left-4 md:top-8 md:left-8 animate-float" style={style}>
       <div className="relative">
         <div
           className="flex items-center justify-center w-[85px] h-[105px] md:w-[185px] md:h-[235px]"
@@ -61,7 +68,7 @@ const Stars = memo(() => {
     { opacity: 1, transform: 'scale(1) rotate(0deg)', transition: 'all 1.1s cubic-bezier(.68,-0.55,.27,1.55)' }
   );
   return (
-    <div className="absolute top-[45%] right-2 md:top-auto md:bottom-32 md:left-32 md:right-auto" style={style}>
+    <div className="absolute top-[45%] right-2 md:top-auto md:bottom-32 md:left-32 md:right-auto animate-twinkle" style={style}>
       <img
         src="/images/Stars.png"
         alt="Stars"
@@ -78,7 +85,7 @@ const OrangeVector1 = memo(() => {
     { opacity: 1, transform: 'translateY(0) scale(1) rotate(0deg)', transition: 'all 1.3s cubic-bezier(.68,-0.55,.27,1.55)' }
   );
   return (
-    <div className="absolute right-[-80px] md:right-[-120px] top-[60%] transform -translate-y-1/2 hidden lg:block w-[650px] h-[650px] z-0" style={style}>
+    <div className="absolute right-[-80px] md:right-[-120px] top-[60%] transform -translate-y-1/2 hidden lg:block w-[650px] h-[650px] z-0 animate-drift-slow" style={style}>
       <div className="w-full h-full bg-gradient-to-br from-orange-400 via-red-500 to-pink-500 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] opacity-80 blur-sm animate-pulse"></div>
       <div className="absolute inset-4 bg-gradient-to-br from-orange-300 via-red-400 to-pink-400 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] opacity-60 transform scale-75 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
       <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-yellow-300 rounded-full opacity-70 animate-bounce"></div>
@@ -96,7 +103,7 @@ const OrangeVector2 = memo(() => {
   );
   return (
     <div
-      className="absolute top-[-117px] right-[-205px] w-[650px] h-[650px] hidden lg:block z-10"
+      className="absolute top-[-117px] right-[-205px] w-[650px] h-[650px] hidden lg:block z-10 animate-drift-medium"
       style={style}
     >
       <div className="w-full h-full bg-gradient-to-br from-orange-500 via-red-600 to-pink-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] opacity-70 blur-sm animate-pulse" style={{ animationDelay: '0.2s' }}></div>
@@ -115,7 +122,7 @@ const OrangeVector3 = memo(() => {
   );
   return (
     <div
-      className="absolute top-[-80px] right-[-400px] w-[650px] h-[650px] hidden lg:block z-10"
+      className="absolute top-[-80px] right-[-400px] w-[650px] h-[650px] hidden lg:block z-10 animate-drift-fast"
       style={style}
     >
       <div className="w-full h-full bg-gradient-to-br from-orange-300 via-red-400 to-pink-400 rounded-[40%_60%_60%_40%/40%_40%_60%_60%] opacity-60 blur-sm animate-pulse" style={{ animationDelay: '0.4s' }}></div>
@@ -134,7 +141,7 @@ const StudentIllustration = memo(() => {
     { opacity: 1, transform: 'translateY(0) scale(1) rotate(0deg)', transition: 'all 1.2s cubic-bezier(.68,-0.55,.27,1.55)' }
   );
   return (
-    <div className="absolute right-[-10px] md:right-5 top-[45%] transform -translate-y-1/2 hidden lg:block z-10" style={style}>
+    <div className="absolute right-[-10px] md:right-5 top-[45%] transform -translate-y-1/2 hidden lg:block z-10 animate-sway" style={style}>
       <img
         src="/images/orang-1.png"
         alt="Student"
@@ -145,7 +152,7 @@ const StudentIllustration = memo(() => {
   );
 });
 
-// Title, subtitle, actions, and countdown
+// Enhanced title with better design
 const HeroTitle = memo(() => {
   const style = useAnimatedMount(
     200,
@@ -153,18 +160,55 @@ const HeroTitle = memo(() => {
     { opacity: 1, transform: 'translateY(0) scale(1) skewY(0deg)', transition: 'all 1.1s cubic-bezier(.68,-0.55,.27,1.55)' }
   );
   return (
-    <div className="mt-[-10px] sm:mt-[-30px] md:mt-[-50px] lg:mt-[-70px] flex flex-col items-center text-center w-full px-2" style={style}>
-      <h1 className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-extrabold mb-1 tracking-wide text-orange-500">
-        WELCOME TO
-      </h1>
-      <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold mb-1 leading-tight flex flex-col items-center">
-        <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-yellow-300 bg-clip-text text-transparent block font-extrabold animate-gradient-move">
-          SWITCHFEST
+    <div
+      className="flex flex-col items-center text-center w-full px-2 relative"
+      style={style}
+    >
+      <div className="relative flex flex-col items-center w-full">
+        {/* "Welcome to" text above the main title, beri jarak dengan h1 */}
+        <span
+          className="uppercase font-semibold text-2xl sm:text-3xl md:text-4xl tracking-widest mb-4"
+          style={{
+            fontFamily: "'Montserrat', 'Orbitron', sans-serif",
+            letterSpacing: '0.13em',
+            marginBottom: '0.5em', // beri jarak lebih besar ke h1
+            marginTop: '-2.5em',
+            fontWeight: 700,
+            // Kuning paling cerah diredup: ganti #fff9c4 (paling terang) jadi #fff3a3, dan #ffe259 jadi #ffe082
+            background: 'linear-gradient(135deg, #fff3a3 0%, #ffecb3 15%, #ffb347 35%, #f6416c 60%, #d946ef 80%, #ffe082 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            backgroundSize: '200% 200%',
+            filter: 'drop-shadow(0 2px 10px rgba(255, 179, 71, 0.25))',
+            animation: 'gradient-shift 4s ease-in-out infinite',
+            display: 'inline-block',
+          }}
+        >
+          Welcome to
         </span>
-        <span className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight bg-gradient-to-r from-orange-500 via-pink-500 to-yellow-300 bg-clip-text text-transparent mt-1 block animate-gradient-move">
-          2025
-        </span>
-      </h1>
+        {/* Main title with enhanced styling */}
+        <h1
+          className="uppercase font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-[0.18em] relative z-10 animate-text-glow"
+          style={{
+            fontFamily: "'Orbitron', 'Montserrat', sans-serif",
+            // Kuning paling cerah diredup: ganti #fff9c4 (paling terang) jadi #fff3a3, dan #ffe259 jadi #ffe082
+            background: 'linear-gradient(135deg, #fff3a3 0%, #ffecb3 15%, #ffb347 35%, #f6416c 60%, #d946ef 80%, #ffe082 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            backgroundSize: '200% 200%',
+            fontWeight: 900,
+            marginTop: '0', // hilangkan margin negatif agar lebih jauh dari span
+            lineHeight: 1.1,
+            textTransform: 'uppercase',
+            filter: 'drop-shadow(0 4px 20px rgba(255, 179, 71, 0.4)) drop-shadow(0 0 10px rgba(246, 65, 108, 0.3))',
+            animation: 'gradient-shift 4s ease-in-out infinite, text-float 3s ease-in-out infinite',
+          }}
+        >
+          SWITCHFEST 2025
+        </h1>
+      </div>
     </div>
   );
 });
@@ -176,10 +220,25 @@ const HeroSubtitle = memo(() => {
     { opacity: 1, transform: 'translateY(0) scale(1)', transition: 'all 1.1s cubic-bezier(.68,-0.55,.27,1.55)' }
   );
   return (
-    <p className="text-base sm:text-lg md:text-xl text-gray-800 mb-6 sm:mb-8 font-medium max-w-xs sm:max-w-lg md:max-w-2xl mx-auto px-2 sm:px-0 leading-snug sm:leading-normal" style={style}>
-      Empowering Students, <br className="block sm:hidden" />
-      Shaping Digital Tomorrow
-    </p>
+    <div
+      className="text-base sm:text-lg md:text-xl font-semibold my-4"
+      style={{
+        color: '#232323',
+        textShadow: '0 2px 12px #ffb34733',
+        maxWidth: '700px',
+        margin: '0 auto',
+        lineHeight: 1.5,
+        fontFamily: "'Montserrat', 'Orbitron', sans-serif",
+        fontWeight: 600,
+        fontStyle: 'normal',
+        letterSpacing: '0.01em',
+        ...style,
+        marginTop: '1em',
+        marginBottom: '1em',
+      }}
+    >
+      Empowering Students, Shaping Digital Tomorrow
+    </div>
   );
 });
 
@@ -332,7 +391,7 @@ const CountdownTimer = memo(() => {
 
   // Ubah mt-12 menjadi mt-6 agar jarak ke atas lebih kecil
   return (
-    <div className="flex flex-col items-center mt-6 max-w-md mx-auto">
+    <div className="relative flex flex-col items-center max-w-md mx-auto z-30 mt-6">
       <div className="mb-4 text-center">
         <span className="text-base md:text-lg font-semibold text-orange-700">{titleText}</span>
       </div>
@@ -421,26 +480,6 @@ const Hero = () => {
         label="Juklak-Juknis"
         items={popupJuklakItems}
       />
-      {/* Custom keyframes for gradient text and pop effect */}
-      <style>{`
-        @keyframes gradient-move {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient-move {
-          background-size: 200% 200%;
-          animation: gradient-move 3s ease-in-out infinite;
-        }
-        @keyframes pop {
-          0% { transform: scale(0.8); }
-          60% { transform: scale(1.08); }
-          100% { transform: scale(1); }
-        }
-        .animate-pop {
-          animation: pop 0.7s cubic-bezier(.68,-0.55,.27,1.55) both;
-        }
-      `}</style>
     </section>
   );
 };

@@ -1,28 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Timeline = () => {
+  // Data timeline yang baru dengan detail untuk setiap kategori.
   const TIMELINE_ITEMS = [
-    {
-      title: 'OPEN REGISTRATION',
-      description: 'Pendaftaran peserta Switchfest 2025 dibuka untuk seluruh mahasiswa UIN Walisongo.',
-    },
-    {
-      title: 'PRE-EVENT & WORKSHOP',
-      description: 'Rangkaian workshop, seminar, dan pembekalan untuk peserta dan umum.',
-    },
-    {
-      title: 'MAIN EVENT',
-      description: 'Kompetisi, pameran inovasi, dan kolaborasi teknologi berlangsung seru.',
-    },
-    {
-      title: 'AWARDING & CLOSING',
-      description: 'Pengumuman pemenang, awarding night, dan penutupan Switchfest 2025.',
-    },
+    { title: 'UI/UX & WEB', description: 'Jadwal lengkap untuk kompetisi UI/UX dan Web.' },
+    { title: 'Batch 1', description: '21 Agustus - 7 September' },
+    { title: 'Batch 2', description: '8 September - 5 Oktober' },
+    { title: 'Penyisihan', description: '6 Oktober - 8 Oktober' },
+    { title: 'Pengumuman', description: '9 Oktober' },
+    { title: 'TM', description: '10 Oktober' },
+    { title: 'Final UI/UX', description: '13 Oktober' },
+    { title: 'Final Web', description: '14 Oktober' },
+    { title: 'Pengumuman Juara', description: '17 Oktober' },
+    { title: 'POSTER', description: 'Jadwal lengkap untuk kompetisi Poster.' },
+    { title: 'Batch 1', description: '21 Agustus - 4 September' },
+    { title: 'Batch 2', description: '5 September - 26 September' },
+    { title: 'Penilaian', description: '27 September - 28 September' },
+    { title: 'Pengumuman', description: '2 Oktober' },
   ];
 
+  // State untuk melacak halaman saat ini.
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 4;
+  const totalPages = Math.ceil(TIMELINE_ITEMS.length / itemsPerPage);
+
+  // Mengatur item yang ditampilkan berdasarkan halaman saat ini.
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const visibleItems = TIMELINE_ITEMS.slice(startIndex, endIndex);
+
+  // Handler untuk tombol "SELANJUTNYA"
+  const handleNext = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages - 1));
+  };
+
+  // Handler untuk tombol "SEBELUMNYA"
+  const handlePrev = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 0));
+  };
+
+  // Komponen individu untuk setiap item timeline.
   const TimelineItem = ({ title, description }) => (
     <div className="relative w-full md:w-[22%] flex flex-col items-center text-center">
-      {/* No vertical line */}
+      {/* Container utama untuk teks judul dan deskripsi */}
       <div className="relative z-10 w-[170px] mb-4">
         <div
           className="text-base md:text-lg leading-tight mb-3 font-extrabold uppercase"
@@ -51,7 +71,7 @@ const Timeline = () => {
           {description}
         </div>
       </div>
-      {/* Glowing ellipse "spotlight" */}
+      {/* Efek cahaya "spotlight" berbentuk elips */}
       <div
         className="mt-6 relative z-[2]"
         style={{
@@ -66,7 +86,7 @@ const Timeline = () => {
           position: 'relative',
         }}
       >
-        {/* Glassmorphism overlay */}
+        {/* Lapisan "Glassmorphism" */}
         <div
           className="absolute pointer-events-none"
           style={{
@@ -81,7 +101,7 @@ const Timeline = () => {
             zIndex: -1,
           }}
         />
-        {/* Pink/purple accent glow */}
+        {/* Aksen cahaya pink/ungu */}
         <div
           className="absolute pointer-events-none"
           style={{
@@ -100,9 +120,16 @@ const Timeline = () => {
     </div>
   );
 
-  const TimelineButton = ({ children, icon, reverse }) => (
+  // Komponen untuk tombol navigasi.
+  const TimelineButton = ({ children, icon, reverse, onClick, disabled }) => (
     <button
-      className="flex items-center gap-2 border rounded text-[#232323] text-xs md:text-sm cursor-pointer select-none transition-all duration-300 ease-in-out hover:shadow-[0_0_24px_#ffb34799] hover:scale-105"
+      onClick={onClick}
+      disabled={disabled}
+      className={`flex items-center gap-2 border rounded text-[#232323] text-xs md:text-sm select-none transition-all duration-300 ease-in-out ${
+        disabled
+          ? 'opacity-50 cursor-not-allowed'
+          : 'hover:shadow-[0_0_24px_#ffb34799] hover:scale-105 cursor-pointer'
+      }`}
       style={{
         fontFamily: "'Montserrat', 'Orbitron', sans-serif",
         textTransform: 'uppercase',
@@ -137,9 +164,8 @@ const Timeline = () => {
         backgroundBlendMode: 'overlay, overlay',
       }}
     >
-      {/* Header and Main Timeline Container */}
-      <div className="relative w-full text-center mb-6 md:mb-8 flex-shrink-0" style={{marginTop: '-1.5rem'}}>
-        {/* UI like the reference section */}
+      {/* Header dan Container Utama Timeline */}
+      <div className="relative w-full text-center mb-6 md:mb-8 flex-shrink-0" style={{ marginTop: '-1.5rem' }}>
         <div className="flex flex-col items-center gap-2">
           {/* Tagline badge */}
           <div
@@ -173,29 +199,105 @@ const Timeline = () => {
                 fill="#ffb347"
                 stroke="#ff9800"
                 strokeWidth="1"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
             SWITCHFEST 2025
           </div>
-          {/* Main Title */}
-          <h1
-            className="uppercase font-extrabold text-2xl sm:text-3xl md:text-4xl tracking-tight"
-            style={{
-              fontFamily: "'Montserrat', 'Orbitron', sans-serif",
-              background: 'linear-gradient(90deg, #ff6a00 0%, #ffb347 30%, #f6416c 70%, #d46fff 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              textShadow: '0 2px 24px #ffb34755',
-              letterSpacing: '0.04em',
-              marginBottom: '0.15em',
-              fontStyle: 'normal',
-              fontWeight: 900,
-              marginTop: '-0.5em',
-            }}
-          >
-            Timeline switchfest
-          </h1>
+          {/* Judul Utama */}
+          <div className="relative flex flex-col items-center w-full">
+            {/* Decorative SVG background for the title */}
+            <svg
+              width="380"
+              height="60"
+              viewBox="0 0 380 60"
+              fill="none"
+              className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 pointer-events-none select-none"
+              style={{
+                zIndex: 0,
+                filter: 'blur(2px) drop-shadow(0 4px 32px #ffb34766)',
+                opacity: 0.7,
+              }}
+            >
+              <ellipse
+                cx="190"
+                cy="30"
+                rx="170"
+                ry="18"
+                fill="url(#paint0_radial_heroTitle)"
+              />
+              <defs>
+                <radialGradient
+                  id="paint0_radial_heroTitle"
+                  cx="0"
+                  cy="0"
+                  r="1"
+                  gradientTransform="translate(190 30) scale(170 18)"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stopColor="#ffe259" stopOpacity="0.7" />
+                  <stop offset="0.5" stopColor="#ffb347" stopOpacity="0.3" />
+                  <stop offset="1" stopColor="#f6416c" stopOpacity="0.1" />
+                </radialGradient>
+              </defs>
+            </svg>
+            <h1
+              className="uppercase font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight relative z-10"
+              style={{
+                fontFamily: "'Orbitron', 'Montserrat', sans-serif",
+                background: 'linear-gradient(90deg, #ff6a00 0%, #ffb347 30%, #f6416c 70%, #d46fff 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                textShadow: '0 4px 32px #ffb34755, 0 1px 0 #fff6b7',
+                letterSpacing: '0.08em',
+                marginBottom: '0.1em',
+                fontStyle: 'normal',
+                fontWeight: 900,
+                marginTop: '-0.2em',
+                lineHeight: 1.1,
+                textTransform: 'uppercase',
+                transition: 'all 0.3s cubic-bezier(.4,2,.6,1)',
+                filter: 'drop-shadow(0 2px 16px #f6416c33)',
+              }}
+            >
+              <span
+                style={{
+                  display: 'inline-block',
+                  marginLeft: '0.4em',
+                  fontWeight: 800,
+                  fontFamily: "'Orbitron', 'Montserrat', sans-serif",
+                  letterSpacing: '0.18em',
+                  color: 'inherit',
+                  filter: 'drop-shadow(0 2px 12px #ffb34799)',
+                  textShadow: '0 2px 24px #ffb34799, 0 1px 0 #fff6b7',
+                  textTransform: 'uppercase',
+                  fontSize: '0.85em',
+                }}
+              >
+                timeline Switchfest
+              </span>
+            </h1>
+            {/* Animated underline accent */}
+            <div
+              className="w-32 h-2 rounded-full mt-1 mb-2"
+              style={{
+                background: 'linear-gradient(90deg, #ffb347 0%, #f6416c 100%)',
+                boxShadow: '0 2px 16px #ffb34755, 0 0 8px #d46fff55',
+                animation: 'pulse-underline 2.5s infinite alternate',
+                opacity: 0.85,
+              }}
+            />
+            <style>
+              {`
+                @keyframes pulse-underline {
+                  0% { transform: scaleX(0.85); opacity: 0.7; }
+                  100% { transform: scaleX(1.15); opacity: 1; }
+                }
+              `}
+            </style>
+          </div>
           {/* Subtitle */}
           <div
             className="text-base sm:text-lg md:text-xl font-semibold"
@@ -216,17 +318,19 @@ const Timeline = () => {
         </div>
       </div>
 
-      {/* Timeline content with 4 spotlight items horizontally spaced */}
+      {/* Konten Timeline dengan 4 item spotlight yang diatur secara horizontal */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-y-32 md:gap-y-0 w-full max-w-7xl mx-auto flex-1">
-        {TIMELINE_ITEMS.map((item, idx) => (
-          <TimelineItem key={idx} title={item.title} description={item.description} />
+        {visibleItems.map((item, idx) => (
+          <TimelineItem key={startIndex + idx} title={item.title} description={item.description} />
         ))}
       </div>
 
-      {/* Bottom controls and progress bar */}
+      {/* Kontrol bawah dan progress bar */}
       <div className="flex items-center justify-between mt-8 md:mt-12 w-full max-w-7xl mx-auto flex-shrink-0">
-        {/* Previous button */}
+        {/* Tombol "SEBELUMNYA" */}
         <TimelineButton
+          onClick={handlePrev}
+          disabled={currentPage === 0}
           icon={
             <svg
               fill="none"
@@ -260,8 +364,10 @@ const Timeline = () => {
           }}
         />
 
-        {/* Next button */}
+        {/* Tombol "SELANJUTNYA" */}
         <TimelineButton
+          onClick={handleNext}
+          disabled={currentPage === totalPages - 1}
           icon={
             <svg
               fill="none"

@@ -210,7 +210,7 @@ const Navbar = () => {
         <div ref={logoRef} className="flex-shrink-0 z-10">
           <a href="/" className="flex items-center p-4">
             <img
-              src="../images/logo-sf.png"
+              src="../images/logo/logo-sf.png"
               alt="Logo SF"
               className="h-10 w-auto"
               style={{ filter: "brightness(0) invert(1)" }}

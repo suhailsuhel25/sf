@@ -339,21 +339,152 @@ const Category = () => {
 
 // Header as a separate component
 const Header = memo(() => (
-    <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-pink-300 bg-white/10 shadow-md mb-4">
-            <svg className="w-4 h-4 text-pink-400 animate-pulse" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 17.75l-6.172 3.245 1.179-6.873L2 9.755l6.914-1.004L12 2.5l3.086 6.251L22 9.755l-5.007 4.367 1.179 6.873z" /></svg>
-            <span className="text-base font-semibold tracking-wide text-pink-400">SWITCHFEST 2025</span>
-        </div>
-        <h2
-            className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent drop-shadow-lg mb-2 tracking-tight"
-            style={{ WebkitBackgroundClip: "text", backgroundClip: "text" }}
+  <div className="relative w-full text-center mb-8 flex-shrink-0" style={{ marginTop: '-1.5rem' }}>
+    <div className="flex flex-col items-center gap-2">
+      {/* Tagline badge */}
+      <div
+        className="inline-flex items-center px-4 py-1 rounded-full border border-[#ffe082] bg-white/10 backdrop-blur-md"
+        style={{
+          fontFamily: "'Montserrat', 'Orbitron', sans-serif",
+          color: '#ff9800',
+          fontWeight: 700,
+          fontSize: '1rem',
+          letterSpacing: '0.08em',
+          boxShadow: '0 2px 12px #ffe08233',
+          borderWidth: '2px',
+          borderColor: '#ffe082',
+          background: 'rgba(255, 246, 183, 0.10)',
+          marginBottom: '0.5rem',
+          gap: '0.5rem',
+          textTransform: 'uppercase',
+          fontStyle: 'normal',
+        }}
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 20 20"
+          fill="none"
+          className="mr-1"
+          style={{ display: 'inline', verticalAlign: 'middle' }}
         >
-            BATTLE ARENA
-        </h2>
-        <p className="text-lg max-w-2xl mx-auto leading-relaxed text-pink-100/90">
-            Pilih kategori lomba dan buktikan kemampuanmu di arena kompetisi terbesar tahun ini
-        </p>
+          <path
+            d="M10 2.5L12.4721 7.23607L17.8042 7.76393L13.9021 11.2639L15.1803 16.4861L10 13.75L4.81966 16.4861L6.09789 11.2639L2.19577 7.76393L7.52786 7.23607L10 2.5Z"
+            fill="#ffb347"
+            stroke="#ff9800"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        SWITCHFEST 2025
+      </div>
+      {/* Judul Utama */}
+      <div className="relative flex flex-col items-center w-full">
+        {/* Decorative SVG background for the title */}
+        <svg
+          width="380"
+          height="60"
+          viewBox="0 0 380 60"
+          fill="none"
+          className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 pointer-events-none select-none"
+          style={{
+            zIndex: 0,
+            filter: 'blur(2px) drop-shadow(0 4px 32px #ffb34766)',
+            opacity: 0.7,
+          }}
+        >
+          <ellipse
+            cx="190"
+            cy="30"
+            rx="170"
+            ry="18"
+            fill="url(#paint0_radial_heroTitle_category)"
+          />
+          <defs>
+            <radialGradient
+              id="paint0_radial_heroTitle_category"
+              cx="0"
+              cy="0"
+              r="1"
+              gradientTransform="translate(190 30) scale(170 18)"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#ffe259" stopOpacity="0.7" />
+              <stop offset="0.5" stopColor="#ffb347" stopOpacity="0.3" />
+              <stop offset="1" stopColor="#f6416c" stopOpacity="0.1" />
+            </radialGradient>
+          </defs>
+        </svg>
+        <h1
+          className="uppercase font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight relative z-10"
+          style={{
+            fontFamily: "'Orbitron', 'Montserrat', sans-serif",
+            background: 'linear-gradient(90deg, #ff6a00 0%, #ffb347 30%, #f6416c 70%, #d46fff 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            textShadow: '0 4px 32px #ffb34755, 0 1px 0 #fff6b7',
+            letterSpacing: '0.08em',
+            marginBottom: '0.1em',
+            fontStyle: 'normal',
+            fontWeight: 900,
+            marginTop: '-0.2em',
+            lineHeight: 1.1,
+            textTransform: 'uppercase',
+            transition: 'all 0.3s cubic-bezier(.4,2,.6,1)',
+            filter: 'drop-shadow(0 2px 16px #f6416c33)',
+          }}
+        >
+          <span
+            style={{
+              display: 'inline-block',
+              transform: 'skewX(-8deg) scaleY(1.08)',
+              letterSpacing: '0.12em',
+              textShadow: '0 2px 24px #d46fff66, 0 1px 0 #fff6b7',
+            }}
+          >
+            competitions Category
+          </span>
+        </h1>
+        {/* Animated underline accent */}
+        <div
+          className="w-32 h-2 rounded-full mt-1 mb-2"
+          style={{
+            background: 'linear-gradient(90deg, #ffb347 0%, #f6416c 100%)',
+            boxShadow: '0 2px 16px #ffb34755, 0 0 8px #d46fff55',
+            animation: 'pulse-underline 2.5s infinite alternate',
+            opacity: 0.85,
+          }}
+        />
+        <style>
+          {`
+            @keyframes pulse-underline {
+              0% { transform: scaleX(0.85); opacity: 0.7; }
+              100% { transform: scaleX(1.15); opacity: 1; }
+            }
+          `}
+        </style>
+      </div>
+      {/* Subtitle */}
+      <div
+        className="text-base sm:text-lg md:text-xl font-semibold"
+        style={{
+          color: '#fffbe6',
+          textShadow: '0 2px 12px #ffb34733',
+          maxWidth: '700px',
+          margin: '0 auto',
+          lineHeight: 1.5,
+          fontFamily: "'Montserrat', 'Orbitron', sans-serif",
+          fontWeight: 600,
+          fontStyle: 'normal',
+          letterSpacing: '0.01em',
+        }}
+      >
+        Pilih kategori lomba dan buktikan kemampuanmu di arena kompetisi terbesar tahun ini
+      </div>
     </div>
+  </div>
 ));
 
 // Bottom CTA as a separate component
