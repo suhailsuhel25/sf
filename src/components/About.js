@@ -5,29 +5,6 @@ import { motion } from "framer-motion"; // <-- Import motion
 
 const About = () => {
   const [showDaftar, setShowDaftar] = useState(false);
-  const PARTICLE_COUNT = 14;
-  const [particles, setParticles] = useState([]);
-
-  useEffect(() => {
-    const generateParticles = () =>
-      Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        speed: Math.random() * 1.2 + 0.5,
-        opacity: 0.1 + (i % 3) * 0.09,
-      }));
-    setParticles(generateParticles());
-    const interval = setInterval(() => {
-      setParticles((prev) =>
-        prev.map((p) => ({
-          ...p,
-          y: p.y > 100 ? -5 : p.y + p.speed * 0.12,
-        }))
-      );
-    }, 60);
-    return () => clearInterval(interval);
-  }, []);
 
   // Definisi animasi dengan `variants`
   const headerVariants = {
