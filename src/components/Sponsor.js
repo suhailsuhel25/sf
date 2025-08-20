@@ -83,123 +83,28 @@ const ParallaxSponsors = () => {
   
   return (
     <section
-      className="relative w-full overflow-hidden min-h-[75vh] flex flex-col items-center justify-center py-24"
-      style={{
-        background: "linear-gradient(180deg, #232946 0%, #232323 60%, #232323 100%)",
-        color: "#fffbe6",
-      }}
+      className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden"
     >
-      {/* Gradient Touches */}
-      <div
-        className="pointer-events-none"
-        style={{
-          position: "absolute",
-          top: "-120px",
-          left: "-120px",
-          width: "340px",
-          height: "340px",
-          background: "radial-gradient(circle at 30% 30%, #ff2eb2cc 0%, #ffb34700 80%)",
-          filter: "blur(60px)",
-          opacity: 0.7,
-          zIndex: 5,
-        }}
-      />
-      <div
-        className="pointer-events-none"
-        style={{
-          position: "absolute",
-          bottom: "-120px",
-          right: "-120px",
-          width: "340px",
-          height: "340px",
-          background: "radial-gradient(circle at 70% 70%, #ffb347cc 0%, #ff2eb200 80%)",
-          filter: "blur(60px)",
-          opacity: 0.7,
-          zIndex: 5,
-        }}
-      />
-      <div
-        className="pointer-events-none"
-        style={{
-          position: "absolute",
-          top: "40%",
-          left: "-100px",
-          width: "220px",
-          height: "220px",
-          background: "radial-gradient(circle at 0% 50%, #a259ff99 0%, #23232300 80%)",
-          filter: "blur(40px)",
-          opacity: 0.5,
-          zIndex: 5,
-        }}
-      />
-      <div
-        className="pointer-events-none"
-        style={{
-          position: "absolute",
-          top: "60%",
-          right: "-100px",
-          width: "220px",
-          height: "220px",
-          background: "radial-gradient(circle at 100% 50%, #ffe59d99 0%, #23232300 80%)",
-          filter: "blur(40px)",
-          opacity: 0.4,
-          zIndex: 5,
-        }}
-      />
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-[#1c1c1c] to-[#111] animate-gradient-slow bg-[length:200%_200%]" />
 
-      {/* Overlay */}
-      <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(180deg, #ffb34722 0%, #23232300 60%, #ff2eb2 120%)",
-          mixBlendMode: "lighten",
-        }}
-      ></div>
+      {/* Glow accents */}
+      <div className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-orange-500/30 via-pink-500/20 to-purple-500/30 blur-3xl animate-pulse-slow" />
+      <div className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-pink-400/20 via-purple-500/30 to-orange-400/20 blur-3xl animate-pulse-slower" />
 
-      {/* Konten */}
-      <div className="relative z-20 w-full px-6 lg:px-8 text-center">
+      {/* Grid overlay */}
+      <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+      {/* Content wrapper */}
+      <div className="relative z-10 w-full px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Judul UI seperti di Timeline */}
-        <div className="relative w-full text-center mb-6 md:mb-8 flex-shrink-0" style={{ marginTop: '-1.5rem' }}>
+        <div
+          className="relative w-full text-center mb-6 md:mb-8 flex-shrink-0"
+          style={{
+            marginTop: '3.5rem', // Tambahkan jarak atas agar judul tidak kepotong
+          }}
+        >
           <div className="flex flex-col items-center gap-2">
-            {/* Tagline badge */}
-            <div
-              className="inline-flex items-center px-4 py-1 rounded-full border border-[#ffe082] bg-white/10 backdrop-blur-md"
-              style={{
-                fontFamily: "'Montserrat', 'Orbitron', sans-serif",
-                color: '#ff9800',
-                fontWeight: 700,
-                fontSize: '1rem',
-                letterSpacing: '0.08em',
-                boxShadow: '0 2px 12px #ffe08233',
-                borderWidth: '2px',
-                borderColor: '#ffe082',
-                background: 'rgba(255, 246, 183, 0.10)',
-                marginBottom: '0.5rem',
-                gap: '0.5rem',
-                textTransform: 'uppercase',
-                fontStyle: 'normal',
-              }}
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 20 20"
-                fill="none"
-                className="mr-1"
-                style={{ display: 'inline', verticalAlign: 'middle' }}
-              >
-                <path
-                  d="M10 2.5L12.4721 7.23607L17.8042 7.76393L13.9021 11.2639L15.1803 16.4861L10 13.75L4.81966 16.4861L6.09789 11.2639L2.19577 7.76393L7.52786 7.23607L10 2.5Z"
-                  fill="#ffb347"
-                  stroke="#ff9800"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              SWITCHFEST 2025
-            </div>
             {/* Judul Utama */}
             <div className="relative flex flex-col items-center w-full">
               {/* Decorative SVG background for the title */}
@@ -315,7 +220,7 @@ const ParallaxSponsors = () => {
               {[...sponsorImages, ...sponsorImages].map((logo, idx) => (
                 <div
                   key={logo.src + idx + "-left"}
-                  className="marquee-logo-item flex flex-col items-center"
+                  className="marquee-logo-item"
                   style={{ minWidth: "160px" }}
                 >
                   <SponsorLogo src={logo.src} alt={logo.alt} name={logo.name} />
@@ -329,7 +234,7 @@ const ParallaxSponsors = () => {
               {[...sponsorImages, ...sponsorImages].reverse().map((logo, idx) => (
                 <div
                   key={logo.src + idx + "-right"}
-                  className="marquee-logo-item flex flex-col items-center"
+                  className="marquee-logo-item"
                   style={{ minWidth: "160px" }}
                 >
                   <SponsorLogo src={logo.src} alt={logo.alt} name={logo.name} />
@@ -337,30 +242,30 @@ const ParallaxSponsors = () => {
               ))}
             </div>
           </div>
-          {/* Nama sponsor baris horizontal */}
-          <div className="w-full flex flex-row flex-wrap justify-center items-center gap-x-8 gap-y-2 mt-8 px-2">
-            {sponsorImages.map((logo, idx) => (
-              <span
-                key={logo.name + "-name-" + idx}
-                className="text-xs md:text-sm font-medium text-[#ffe082] whitespace-nowrap"
-                style={{
-                  textShadow: '0 1px 4px #232323cc, 0 0px 2px #ffb34755',
-                  letterSpacing: '0.01em',
-                  lineHeight: 1.2,
-                  margin: '0 0.5em',
-                  maxWidth: '140px',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  display: 'inline-block',
-                  verticalAlign: 'middle',
-                }}
-              >
-                {logo.name}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
+
+      {/* Extra Animations */}
+      <style>{`
+        @keyframes gradient-slow {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-slow {
+          animation: gradient-slow 18s ease infinite;
+        }
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.4; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 8s ease-in-out infinite;
+        }
+        .animate-pulse-slower {
+          animation: pulse-slow 12s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };

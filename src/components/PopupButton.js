@@ -17,10 +17,13 @@ const PopupButton = ({ showModal, setShowModal, label = "Pilih", items = [] }) =
       }
     }
     if (showModal) {
-      // Jangan disable scroll pada body
+      document.body.style.overflow = "hidden";
       document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.body.style.overflow = "auto";
     }
     return () => {
+      document.body.style.overflow = "auto";
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showModal, setShowModal]);
@@ -36,13 +39,13 @@ const PopupButton = ({ showModal, setShowModal, label = "Pilih", items = [] }) =
   }
 
   const modalContent = (
-    <div className="fixed inset-0 z-[99999] flex items-center justify-center pointer-events-none">
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40 transition-opacity z-[99998] pointer-events-auto" />
+      <div className="absolute inset-0 bg-black/40 transition-opacity z-[99998]" />
       {/* Modal di tengah layar */}
       <div
         ref={modalRef}
-        className="bg-white rounded-2xl shadow-2xl p-8 max-w-xs w-full relative animate-fade-in flex flex-col items-center z-[100000] pointer-events-auto"
+        className="bg-white rounded-2xl shadow-2xl p-8 max-w-xs w-full relative animate-fade-in flex flex-col items-center z-[100000]"
         style={{ transform: 'translate(0, 0)' }}
       >
         <button

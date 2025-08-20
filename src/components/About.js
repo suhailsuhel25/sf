@@ -48,61 +48,19 @@ const About = () => {
   return (
     <section
       id="about"
-      className="min-h-screen relative overflow-hidden flex items-center py-10"
-      style={{
-        background: `
-          linear-gradient(120deg, #232946 0%, #232323 40%, #ffb347 120%),
-          radial-gradient(circle at 80% 20%, rgba(255, 174, 0, 0.12) 0%, transparent 60%),
-          radial-gradient(circle at 20% 80%, rgba(255, 46, 178, 0.10) 0%, transparent 70%)
-        `,
-      }}
+      className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden"
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px)',
-            backgroundSize: '50px 50px'
-          }}
-        ></div>
-        {/* Floating Particles */}
-        {particles.map((particle, i) => (
-          <div
-            key={particle.id}
-            className="absolute w-1.5 h-1.5"
-            style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              opacity: particle.opacity,
-              background: "linear-gradient(135deg, #ffe59d, #ffb347)",
-              borderRadius: "9999px",
-              animation: "pulse 2.5s infinite",
-              animationDelay: `${i * 0.13}s`,
-            }}
-          />
-        ))}
-        {/* Unique radial highlight */}
-        <div
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[38rem] h-[18rem] rounded-full filter blur-3xl animate-pulse"
-          style={{
-            background:
-              "radial-gradient(circle at 50% 50%, #fffbe6 0%, #ffb34722 80%, transparent 100%)",
-            opacity: 0.13,
-          }}
-        ></div>
-        <div
-          className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full filter blur-3xl animate-pulse"
-          style={{
-            background:
-              "radial-gradient(circle at 70% 70%, #ff2eb2 0%, #232946 100%)",
-            opacity: 0.09,
-            animationDelay: "1.5s",
-          }}
-        ></div>
-      </div>
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-[#1c1c1c] to-[#111] animate-gradient-slow bg-[length:200%_200%]" />
 
+      {/* Glow accents */}
+      <div className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-orange-500/30 via-pink-500/20 to-purple-500/30 blur-3xl animate-pulse-slow" />
+      <div className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-pink-400/20 via-purple-500/30 to-orange-400/20 blur-3xl animate-pulse-slower" />
+
+      {/* Grid overlay */}
+      <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+      {/* Content wrapper */}
       <div className="container mx-auto px-6 relative z-10 w-full">
         {/* Section Header (badge, title, subtitle) */}
         <motion.div
@@ -112,46 +70,8 @@ const About = () => {
           animate="visible"
         >
           <div className="flex flex-col items-center gap-2">
-            {/* Tagline badge ala Timeline */}
-            <div
-              className="inline-flex items-center px-4 py-1 rounded-full border border-[#ffe082] bg-white/10 backdrop-blur-md"
-              style={{
-                fontFamily: "'Montserrat', 'Orbitron', sans-serif",
-                color: '#ff9800',
-                fontWeight: 700,
-                fontSize: '1rem',
-                letterSpacing: '0.08em',
-                boxShadow: '0 2px 12px #ffe08233',
-                borderWidth: '2px',
-                borderColor: '#ffe082',
-                background: 'rgba(255, 246, 183, 0.10)',
-                marginBottom: '0.5rem',
-                gap: '0.5rem',
-                textTransform: 'uppercase',
-                fontStyle: 'normal',
-              }}
-            >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 20 20"
-                fill="none"
-                className="mr-1"
-                style={{ display: 'inline', verticalAlign: 'middle' }}
-              >
-                <path
-                  d="M10 2.5L12.4721 7.23607L17.8042 7.76393L13.9021 11.2639L15.1803 16.4861L10 13.75L4.81966 16.4861L6.09789 11.2639L2.19577 7.76393L7.52786 7.23607L10 2.5Z"
-                  fill="#ffb347"
-                  stroke="#ff9800"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              SWITCHFEST 2025
-            </div>
             {/* Judul Utama ala Timeline */}
-            <div className="relative flex flex-col items-center w-full">
+            <div className="relative flex flex-col items-center w-full pt-6 sm:pt-8 md:pt-10">
               {/* Decorative SVG background for the title */}
               <svg
                 width="380"
@@ -258,7 +178,7 @@ const About = () => {
         </motion.div>
 
         {/* Card Section */}
-        <div className="flex flex-col md:flex-row gap-10 max-w-6xl mx-auto min-h-[60vh] md:min-h-[70vh] h-full">
+        <div className="flex flex-col md:flex-row gap-10 max-w-6xl mx-auto min-h-[60vh] md:min-h-[70vh] h-full pb-6 md:pb-8">
           {/* About Card */}
           <motion.div
             className="flex-[1.25] flex flex-col justify-center min-w-[340px] h-full"
@@ -474,6 +394,28 @@ const About = () => {
           ]}
         />
       </div>
+
+      {/* Extra Animations */}
+      <style>{`
+        @keyframes gradient-slow {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-slow {
+          animation: gradient-slow 18s ease infinite;
+        }
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.4; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 8s ease-in-out infinite;
+        }
+        .animate-pulse-slower {
+          animation: pulse-slow 12s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };

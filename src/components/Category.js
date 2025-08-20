@@ -1,5 +1,5 @@
+
 import { useState, useEffect, memo } from 'react';
-import PopupButton from "./PopupButton"; // Asumsi PopupButton.js berada di direktori yang sama.
 
 // Custom hook for animated particles
 function useParticles(count) {
@@ -76,9 +76,6 @@ const ParticleBackground = memo(({ particles }) => (
 
 // Competition card as a memoized component
 const CompetitionCard = memo(function CompetitionCard({ comp, index, activeCard, setActiveCard }) {
-    // Siapkan state showModal di dalam komponen card agar setiap card memiliki state sendiri
-    const [showModal, setShowModal] = useState(false);
-
     return (
         <div
             key={comp.id}
@@ -91,6 +88,7 @@ const CompetitionCard = memo(function CompetitionCard({ comp, index, activeCard,
                 boxShadow: '0 8px 32px 0 rgba(31,41,55,0.18), 0 1.5px 8px 0 rgba(255, 107, 0, 0.08)'
             }}
         >
+
             {/* Card Glow Effect */}
             <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity duration-500 pointer-events-none"
@@ -153,9 +151,11 @@ const CompetitionCard = memo(function CompetitionCard({ comp, index, activeCard,
                     ))}
                 </div>
 
-                {/* Trigger button untuk memicu PopupButton */}
-                <button
-                    onClick={() => setShowModal(true)}
+                {/* CTA Button */}
+                <a
+                    href="https://drive.google.com/drive/folders/1wQbYKT1eZq9VHtV6nRvWmvMRGsiE9zra?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block w-full text-center py-4 px-6 font-bold rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group/btn"
                     style={{ background: comp.gradient, color: '#fff' }}
                 >
@@ -165,21 +165,10 @@ const CompetitionCard = memo(function CompetitionCard({ comp, index, activeCard,
                     <span className="relative z-10 flex items-center justify-center gap-2">
                         Join Battle
                         <svg width="16" height="16" fill="none" viewBox="0 0 16 16" className="transition-transform group-hover/btn:translate-x-1">
-                            <path d="M8 3l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M8 1l3 3-3 3M11 4H1M8 9l3 3-3 3M11 12H1" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                         </svg>
                     </span>
-                </button>
-
-                {/* Komponen PopupButton dengan data dinamis dari comp */}
-                <PopupButton
-                    showModal={showModal}
-                    setShowModal={setShowModal}
-                    label=""
-                    items={[
-                        { nama: 'Daftar', link: comp.registrationLink },
-                        { nama: 'Juklak-Juknis', link: comp.guidelineLink }
-                    ]}
-                />
+                </a>
             </div>
 
             {/* Active Card Indicator */}
@@ -204,28 +193,26 @@ const competitions = [
         bgGradient: 'linear-gradient(135deg, #232323 0%, #2d2d2d 60%, #ff6a00 100%)',
         iconBg: 'linear-gradient(135deg, #ff9800 0%, #ffb347 100%)',
         tags: [],
-        guidelineLink: "https://drive.google.com/file/d/1rV78hl8eH_G8Xsesh2GYKeZdtcZ1PWE8/view?usp=drivesdk",
-        registrationLink: "https://bit.ly/WebDevelopment_SwitchFest2025",
         // Icon: Web/Code
         icon: (
             // Website/Browser window icon (SVG diperbesar)
             <svg width="70" height="70" fill="none" viewBox="0 0 32 32">
                 {/* Outer browser window */}
-                <rect x="4" y="8" width="24" height="16" rx="2.5" fill="#ffb347" opacity="0.18" />
-                <rect x="6" y="10" width="20" height="12" rx="1.5" fill="#ff9800" />
+                <rect x="4" y="8" width="24" height="16" rx="2.5" fill="#ffb347" opacity="0.18"/>
+                <rect x="6" y="10" width="20" height="12" rx="1.5" fill="#ff9800"/>
                 {/* Browser top bar */}
                 <rect x="6" y="10" width="20" height="3" rx="1.5" fill="#ffb347" />
                 {/* Browser buttons */}
-                <circle cx="8.5" cy="11.5" r="0.7" fill="#fff" opacity="0.7" />
-                <circle cx="11" cy="11.5" r="0.7" fill="#fff" opacity="0.7" />
-                <circle cx="13.5" cy="11.5" r="0.7" fill="#fff" opacity="0.7" />
+                <circle cx="8.5" cy="11.5" r="0.7" fill="#fff" opacity="0.7"/>
+                <circle cx="11" cy="11.5" r="0.7" fill="#fff" opacity="0.7"/>
+                <circle cx="13.5" cy="11.5" r="0.7" fill="#fff" opacity="0.7"/>
                 {/* Website content: header */}
-                <rect x="9" y="15" width="14" height="2" rx="1" fill="#fff" opacity="0.9" />
+                <rect x="9" y="15" width="14" height="2" rx="1" fill="#fff" opacity="0.9"/>
                 {/* Website content: lines */}
-                <rect x="9" y="18.5" width="10" height="1.2" rx="0.6" fill="#fff" opacity="0.7" />
-                <rect x="9" y="21" width="7" height="1.2" rx="0.6" fill="#fff" opacity="0.5" />
+                <rect x="9" y="18.5" width="10" height="1.2" rx="0.6" fill="#fff" opacity="0.7"/>
+                <rect x="9" y="21" width="7" height="1.2" rx="0.6" fill="#fff" opacity="0.5"/>
                 {/* Website content: image placeholder */}
-                <rect x="21" y="18.5" width="2" height="3.7" rx="1" fill="#fff" opacity="0.5" />
+                <rect x="21" y="18.5" width="2" height="3.7" rx="1" fill="#fff" opacity="0.5"/>
             </svg>
         )
     },
@@ -235,13 +222,10 @@ const competitions = [
         subtitle: 'Creative Design Battle',
         description: 'Tunjukkan kreativitasmu dalam merancang antarmuka dan pengalaman pengguna yang memukau dan user-friendly!',
         level: 'Creative',
-        // Ganti warna kuning agar tidak terlalu terang, tapi tetap enak dilihat (pakai #ffe082 dan #ffd54f yang lebih soft, tidak terlalu pucat)
-        gradient: 'linear-gradient(90deg, #ffe082 0%, #ffd54f 100%)',
-        bgGradient: 'linear-gradient(135deg, #232323 0%, #2d2d2d 60%, #ffe082 100%)',
-        iconBg: 'linear-gradient(135deg, #ffe082 0%, #ffd54f 100%)',
+        gradient: 'linear-gradient(90deg, #ffe259 0%, #fff6b7 100%)',
+        bgGradient: 'linear-gradient(135deg, #232323 0%, #2d2d2d 60%, #ffe259 100%)',
+        iconBg: 'linear-gradient(135deg, #ffe259 0%, #fff6b7 100%)',
         tags: [],
-        guidelineLink: "https://drive.google.com/file/d/1rZTCCTislsKIVzmgR4KA3HhXURgdvR3c/view?usp=drivesdk",
-        registrationLink: "https://bit.ly/UIUX-Design_SwitchFest2025",
         // Icon: UI/UX (layout, pen, or similar)
         icon: (
             <svg width="70" height="70" fill="none" viewBox="0 0 32 32">
@@ -264,17 +248,15 @@ const competitions = [
         bgGradient: 'linear-gradient(135deg, #232323 0%, #2d2d2d 60%, #f6416c 100%)',
         iconBg: 'linear-gradient(135deg, #f6416c 0%, #ff2eb2 100%)',
         tags: [],
-        guidelineLink: "https://drive.google.com/file/d/1raJxSQHiBYjSplEpzvC3qS4P0AMl1dC8/view?usp=drivesdk",
-        registrationLink: "https://bit.ly/Poster_SwitchFest2025",
         // Icon: Poster (image, frame, or similar)
         icon: (
             <svg width="70" height="70" fill="none" viewBox="0 0 32 32">
-                <rect x="10" y="4" width="12" height="24" rx="2" fill="#ff2eb2" opacity="0.2" />
-                <rect x="11" y="6" width="10" height="20" rx="1" fill="#ff1749" />
-                <rect x="13" y="8" width="6" height="8" rx="1" fill="#fff" />
-                <rect x="13" y="18" width="6" height="2" rx="1" fill="#ff2eb2" />
-                <rect x="13" y="22" width="6" height="2" rx="1" fill="#ff2eb2" />
-                <circle cx="16" cy="12" r="1.5" fill="#ff2eb2" />
+                <rect x="10" y="4" width="12" height="24" rx="2" fill="#ff2eb2" opacity="0.2"/>
+                <rect x="11" y="6" width="10" height="20" rx="1" fill="#ff1749"/>
+                <rect x="13" y="8" width="6" height="8" rx="1" fill="#fff"/>
+                <rect x="13" y="18" width="6" height="2" rx="1" fill="#ff2eb2"/>
+                <rect x="13" y="22" width="6" height="2" rx="1" fill="#ff2eb2"/>
+                <circle cx="16" cy="12" r="1.5" fill="#ff2eb2"/>
             </svg>
         )
     }
@@ -298,9 +280,9 @@ const Category = () => {
                 <ParticleBackground particles={particles} />
             </div>
 
-            <div className="container mx-auto px-6 relative z-10">
-                <Header />
-                <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+            <div className="container mx-auto px-6 relative">
+                <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto z-10 relative">
                     {competitions.map((comp, index) => (
                         <CompetitionCard
                             key={comp.id}
@@ -312,6 +294,10 @@ const Category = () => {
                     ))}
                 </div>
                 <BottomCTA />
+                {/* Header moved to bottom with lowest z-index */}
+                <div className="absolute left-0 right-0 bottom-0 z-0 w-full">
+                    <Header />
+                </div>
             </div>
 
             <style jsx>{`
@@ -339,152 +325,21 @@ const Category = () => {
 
 // Header as a separate component
 const Header = memo(() => (
-  <div className="relative w-full text-center mb-8 flex-shrink-0" style={{ marginTop: '-1.5rem' }}>
-    <div className="flex flex-col items-center gap-2">
-      {/* Tagline badge */}
-      <div
-        className="inline-flex items-center px-4 py-1 rounded-full border border-[#ffe082] bg-white/10 backdrop-blur-md"
-        style={{
-          fontFamily: "'Montserrat', 'Orbitron', sans-serif",
-          color: '#ff9800',
-          fontWeight: 700,
-          fontSize: '1rem',
-          letterSpacing: '0.08em',
-          boxShadow: '0 2px 12px #ffe08233',
-          borderWidth: '2px',
-          borderColor: '#ffe082',
-          background: 'rgba(255, 246, 183, 0.10)',
-          marginBottom: '0.5rem',
-          gap: '0.5rem',
-          textTransform: 'uppercase',
-          fontStyle: 'normal',
-        }}
-      >
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 20 20"
-          fill="none"
-          className="mr-1"
-          style={{ display: 'inline', verticalAlign: 'middle' }}
-        >
-          <path
-            d="M10 2.5L12.4721 7.23607L17.8042 7.76393L13.9021 11.2639L15.1803 16.4861L10 13.75L4.81966 16.4861L6.09789 11.2639L2.19577 7.76393L7.52786 7.23607L10 2.5Z"
-            fill="#ffb347"
-            stroke="#ff9800"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        SWITCHFEST 2025
-      </div>
-      {/* Judul Utama */}
-      <div className="relative flex flex-col items-center w-full">
-        {/* Decorative SVG background for the title */}
-        <svg
-          width="380"
-          height="60"
-          viewBox="0 0 380 60"
-          fill="none"
-          className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 pointer-events-none select-none"
-          style={{
-            zIndex: 0,
-            filter: 'blur(2px) drop-shadow(0 4px 32px #ffb34766)',
-            opacity: 0.7,
-          }}
-        >
-          <ellipse
-            cx="190"
-            cy="30"
-            rx="170"
-            ry="18"
-            fill="url(#paint0_radial_heroTitle_category)"
-          />
-          <defs>
-            <radialGradient
-              id="paint0_radial_heroTitle_category"
-              cx="0"
-              cy="0"
-              r="1"
-              gradientTransform="translate(190 30) scale(170 18)"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stopColor="#ffe259" stopOpacity="0.7" />
-              <stop offset="0.5" stopColor="#ffb347" stopOpacity="0.3" />
-              <stop offset="1" stopColor="#f6416c" stopOpacity="0.1" />
-            </radialGradient>
-          </defs>
-        </svg>
-        <h1
-          className="uppercase font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight relative z-10"
-          style={{
-            fontFamily: "'Orbitron', 'Montserrat', sans-serif",
-            background: 'linear-gradient(90deg, #ff6a00 0%, #ffb347 30%, #f6416c 70%, #d46fff 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            textShadow: '0 4px 32px #ffb34755, 0 1px 0 #fff6b7',
-            letterSpacing: '0.08em',
-            marginBottom: '0.1em',
-            fontStyle: 'normal',
-            fontWeight: 900,
-            marginTop: '-0.2em',
-            lineHeight: 1.1,
-            textTransform: 'uppercase',
-            transition: 'all 0.3s cubic-bezier(.4,2,.6,1)',
-            filter: 'drop-shadow(0 2px 16px #f6416c33)',
-          }}
-        >
-          <span
-            style={{
-              display: 'inline-block',
-              transform: 'skewX(-8deg) scaleY(1.08)',
-              letterSpacing: '0.12em',
-              textShadow: '0 2px 24px #d46fff66, 0 1px 0 #fff6b7',
-            }}
-          >
-            competitions Category
-          </span>
-        </h1>
-        {/* Animated underline accent */}
-        <div
-          className="w-32 h-2 rounded-full mt-1 mb-2"
-          style={{
-            background: 'linear-gradient(90deg, #ffb347 0%, #f6416c 100%)',
-            boxShadow: '0 2px 16px #ffb34755, 0 0 8px #d46fff55',
-            animation: 'pulse-underline 2.5s infinite alternate',
-            opacity: 0.85,
-          }}
-        />
-        <style>
-          {`
-            @keyframes pulse-underline {
-              0% { transform: scaleX(0.85); opacity: 0.7; }
-              100% { transform: scaleX(1.15); opacity: 1; }
-            }
-          `}
-        </style>
-      </div>
-      {/* Subtitle */}
-      <div
-        className="text-base sm:text-lg md:text-xl font-semibold"
-        style={{
-          color: '#fffbe6',
-          textShadow: '0 2px 12px #ffb34733',
-          maxWidth: '700px',
-          margin: '0 auto',
-          lineHeight: 1.5,
-          fontFamily: "'Montserrat', 'Orbitron', sans-serif",
-          fontWeight: 600,
-          fontStyle: 'normal',
-          letterSpacing: '0.01em',
-        }}
-      >
-        Pilih kategori lomba dan buktikan kemampuanmu di arena kompetisi terbesar tahun ini
-      </div>
-    </div>
-  </div>
+        <div className="text-center mb-8">
+                            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-pink-300 bg-white/10 shadow-md mb-4">
+                                <svg className="w-4 h-4 text-pink-400 animate-pulse" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 17.75l-6.172 3.245 1.179-6.873L2 9.755l6.914-1.004L12 2.5l3.086 6.251L22 9.755l-5.007 4.367 1.179 6.873z"/></svg>
+                                <span className="text-base font-semibold tracking-wide text-pink-400">SWITCHFEST 2025</span>
+                            </div>
+                            <h2
+                                className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent drop-shadow-lg mb-2 tracking-tight"
+                                style={{ WebkitBackgroundClip: "text", backgroundClip: "text" }}
+                            >
+                                BATTLE ARENA
+                            </h2>
+                            <p className="text-lg max-w-2xl mx-auto leading-relaxed text-pink-100/90">
+                                Pilih kategori lomba dan buktikan kemampuanmu di arena kompetisi terbesar tahun ini
+                            </p>
+        </div>
 ));
 
 // Bottom CTA as a separate component

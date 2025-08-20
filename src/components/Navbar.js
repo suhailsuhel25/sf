@@ -45,6 +45,8 @@ const COMPETITION_LINKS = [
   }
 ];
 
+const orbitronFont = { fontFamily: "'Orbitron', 'Montserrat', Arial, sans-serif" };
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -98,27 +100,29 @@ const Navbar = () => {
 
   // Modal component
   const Modal = () => (
-    <div className="fixed inset-0 z-[999] flex items-center justify-center">
+    <div className="fixed inset-0 z-[999] flex items-center justify-center" style={orbitronFont}>
       <div className="absolute inset-0 bg-black/40 transition-opacity" />
       <div
         ref={modalRef}
         className="bg-white rounded-2xl shadow-2xl p-8 max-w-xs w-full relative animate-fade-in flex flex-col items-center"
+        style={orbitronFont}
       >
         <button
           className="absolute top-2 right-2 text-gray-400 hover:text-orange-500 text-xl font-bold focus:outline-none"
           onClick={handleCloseModal}
           aria-label="Tutup"
+          style={orbitronFont}
         >
           &times;
         </button>
-        <h3 className="text-lg font-bold mb-4 text-orange-600 text-center">Pilih Perlombaan</h3>
+        <h3 className="text-lg font-bold mb-4 text-orange-600 text-center" style={orbitronFont}>Pilih Perlombaan</h3>
         <ul className="w-full space-y-3">
           {COMPETITION_LINKS.map(({ href, label }) => (
             <li key={label}>
               <a
                 href={href}
                 className="w-full py-3 text-base daftar-btn font-semibold rounded-xl shadow-md flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300"
-                style={{ textAlign: 'center' }}
+                style={{ textAlign: 'center', ...orbitronFont }}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -136,6 +140,7 @@ const Navbar = () => {
     <div
       ref={navRef}
       className={`${showToggle ? 'hidden' : 'flex'} ${!showToggle ? 'lg:flex' : 'lg:hidden'} items-center z-10`}
+      style={orbitronFont}
     >
       <ul className="flex items-center space-x-2 lg:space-x-4">
         {NAV_LINKS.map(({ href, label, external }, idx) => (
@@ -144,6 +149,7 @@ const Navbar = () => {
               href={href}
               className="nav-link text-sm lg:text-base font-medium px-2 lg:px-4 py-2 rounded flex items-center h-full"
               {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              style={orbitronFont}
             >
               {label}
             </a>
@@ -153,6 +159,7 @@ const Navbar = () => {
       <button
         className="daftar-btn text-sm lg:text-base font-semibold px-4 lg:px-7 py-2 rounded-lg shadow-md flex items-center h-full focus:outline-none focus:ring-2 focus:ring-yellow-400 ml-4 lg:ml-8"
         onClick={handleOpenModal}
+        style={orbitronFont}
       >
         Register
       </button>
@@ -168,9 +175,10 @@ const Navbar = () => {
         maxHeight: menuOpen ? '600px' : '0px',
         overflow: 'hidden',
         transition: 'all 0.5s cubic-bezier(0.4,0,0.2,1)',
+        ...orbitronFont,
       }}
     >
-      <div className="bg-gradient-to-br from-white via-orange-50 to-pink-50 rounded-b-2xl shadow-2xl border border-orange-200 overflow-hidden">
+      <div className="bg-gradient-to-br from-white via-orange-50 to-pink-50 rounded-b-2xl shadow-2xl border border-orange-200 overflow-hidden" style={orbitronFont}>
         <ul className="py-2">
           {NAV_LINKS.map(({ href, label, icon, external }, idx) => (
             <li className="group" onClick={handleMobileMenuItemClick} key={label}>
@@ -178,9 +186,10 @@ const Navbar = () => {
                 href={href}
                 className="flex items-center px-6 py-4 text-gray-700 hover:bg-gradient-to-r hover:from-orange-100 hover:to-pink-100 transition-all duration-200 group-hover:text-orange-600"
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                style={orbitronFont}
               >
                 {icon}
-                <span className="font-medium">{label}</span>
+                <span className="font-medium" style={orbitronFont}>{label}</span>
               </a>
             </li>
           ))}
@@ -189,6 +198,7 @@ const Navbar = () => {
           <button
             className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
             onClick={handleOpenModal}
+            style={orbitronFont}
           >
             Register Now
           </button>
@@ -204,7 +214,7 @@ const Navbar = () => {
         className={`navbar-gradient px-4 lg:px-20 py-2 lg:py-6 h-16 lg:h-16 shadow-lg border-b-4 border-yellow-400/60 flex items-center justify-between fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
           showNavbar ? 'translate-y-0' : '-translate-y-full'
         }`}
-        style={{ willChange: 'transform' }}
+        style={{ willChange: 'transform', ...orbitronFont }}
       >
         {/* Logo */}
         <div ref={logoRef} className="flex-shrink-0 z-10">
@@ -224,6 +234,7 @@ const Navbar = () => {
           className={`${showToggle ? 'flex' : 'hidden'} p-2 items-center text-white focus:outline-none z-20`}
           onClick={() => setMenuOpen((open) => !open)}
           aria-label="Toggle menu"
+          style={orbitronFont}
         >
           <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />

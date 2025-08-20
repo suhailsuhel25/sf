@@ -152,243 +152,321 @@ const Timeline = () => {
   return (
     <section
       id="timeline"
-      className="w-full min-h-screen max-h-screen flex flex-col justify-between items-center p-8 md:p-16 overflow-hidden"
-      style={{
-        background:
-          'linear-gradient(180deg, #232323 0%, #1f2937 60%, #2d2d2d 100%)',
-        backgroundImage:
-          'linear-gradient(135deg, rgba(255,186,0,0.04) 0%, rgba(246,65,108,0.06) 100%), url("https://placehold.co/100x100/232323/232323?text=%20")',
-        backgroundSize: 'cover, 12px 12px',
-        backgroundPosition: 'center, center',
-        backgroundRepeat: 'no-repeat, repeat',
-        backgroundBlendMode: 'overlay, overlay',
-      }}
+      className="relative w-full min-h-screen flex flex-col items-center p-8 md:p-16 text-white overflow-hidden"
+      style={{ paddingBottom: '0' }}
     >
-      {/* Header dan Container Utama Timeline */}
-      <div className="relative w-full text-center mb-6 md:mb-8 flex-shrink-0" style={{ marginTop: '-1.5rem' }}>
-        <div className="flex flex-col items-center gap-2">
-          {/* Tagline badge */}
-          <div
-            className="inline-flex items-center px-4 py-1 rounded-full border border-[#ffe082] bg-white/10 backdrop-blur-md"
-            style={{
-              fontFamily: "'Montserrat', 'Orbitron', sans-serif",
-              color: '#ff9800',
-              fontWeight: 700,
-              fontSize: '1rem',
-              letterSpacing: '0.08em',
-              boxShadow: '0 2px 12px #ffe08233',
-              borderWidth: '2px',
-              borderColor: '#ffe082',
-              background: 'rgba(255, 246, 183, 0.10)',
-              marginBottom: '0.5rem',
-              gap: '0.5rem',
-              textTransform: 'uppercase',
-              fontStyle: 'normal',
-            }}
-          >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 20 20"
-              fill="none"
-              className="mr-1"
-              style={{ display: 'inline', verticalAlign: 'middle' }}
-            >
-              <path
-                d="M10 2.5L12.4721 7.23607L17.8042 7.76393L13.9021 11.2639L15.1803 16.4861L10 13.75L4.81966 16.4861L6.09789 11.2639L2.19577 7.76393L7.52786 7.23607L10 2.5Z"
-                fill="#ffb347"
-                stroke="#ff9800"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            SWITCHFEST 2025
-          </div>
-          {/* Judul Utama */}
-          <div className="relative flex flex-col items-center w-full">
-            {/* Decorative SVG background for the title */}
-            <svg
-              width="380"
-              height="60"
-              viewBox="0 0 380 60"
-              fill="none"
-              className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 pointer-events-none select-none"
-              style={{
-                zIndex: 0,
-                filter: 'blur(2px) drop-shadow(0 4px 32px #ffb34766)',
-                opacity: 0.7,
-              }}
-            >
-              <ellipse
-                cx="190"
-                cy="30"
-                rx="170"
-                ry="18"
-                fill="url(#paint0_radial_heroTitle)"
-              />
-              <defs>
-                <radialGradient
-                  id="paint0_radial_heroTitle"
-                  cx="0"
-                  cy="0"
-                  r="1"
-                  gradientTransform="translate(190 30) scale(170 18)"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#ffe259" stopOpacity="0.7" />
-                  <stop offset="0.5" stopColor="#ffb347" stopOpacity="0.3" />
-                  <stop offset="1" stopColor="#f6416c" stopOpacity="0.1" />
-                </radialGradient>
-              </defs>
-            </svg>
-            <h1
-              className="uppercase font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight relative z-10"
-              style={{
-                fontFamily: "'Orbitron', 'Montserrat', sans-serif",
-                background: 'linear-gradient(90deg, #ff6a00 0%, #ffb347 30%, #f6416c 70%, #d46fff 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                textShadow: '0 4px 32px #ffb34755, 0 1px 0 #fff6b7',
-                letterSpacing: '0.08em',
-                marginBottom: '0.1em',
-                fontStyle: 'normal',
-                fontWeight: 900,
-                marginTop: '-0.2em',
-                lineHeight: 1.1,
-                textTransform: 'uppercase',
-                transition: 'all 0.3s cubic-bezier(.4,2,.6,1)',
-                filter: 'drop-shadow(0 2px 16px #f6416c33)',
-              }}
-            >
-              <span
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-[#1c1c1c] to-[#111] animate-gradient-slow bg-[length:200%_200%]" />
+
+      {/* Glow accents */}
+      <div className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-orange-500/30 via-pink-500/20 to-purple-500/30 blur-3xl animate-pulse-slow" />
+      <div className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-pink-400/20 via-purple-500/30 to-orange-400/20 blur-3xl animate-pulse-slower" />
+
+      {/* Grid overlay */}
+      <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+      {/* Content wrapper */}
+      <div className="relative z-10 flex flex-col w-full h-full flex-1">
+        {/* Header dan Container Utama Timeline */}
+        <div className="relative w-full text-center mb-6 md:mb-8 flex-shrink-0" style={{ marginTop: 0, paddingTop: 0 }}>
+          <div className="flex flex-col items-center gap-2">
+            {/* Judul Utama */}
+            <div className="relative flex flex-col items-center w-full" style={{ marginTop: '-2.5rem' }}>
+              {/* Decorative SVG background for the title */}
+              <svg
+                width="380"
+                height="60"
+                viewBox="0 0 380 60"
+                fill="none"
+                className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 pointer-events-none select-none"
                 style={{
-                  display: 'inline-block',
-                  marginLeft: '0.4em',
-                  fontWeight: 800,
-                  fontFamily: "'Orbitron', 'Montserrat', sans-serif",
-                  letterSpacing: '0.18em',
-                  color: 'inherit',
-                  filter: 'drop-shadow(0 2px 12px #ffb34799)',
-                  textShadow: '0 2px 24px #ffb34799, 0 1px 0 #fff6b7',
-                  textTransform: 'uppercase',
-                  fontSize: '0.85em',
+                  zIndex: 0,
+                  filter: 'blur(2px) drop-shadow(0 4px 32px #ffb34766)',
+                  opacity: 0.7,
                 }}
               >
-                timeline Switchfest
-              </span>
-            </h1>
-            {/* Animated underline accent */}
+                <ellipse
+                  cx="190"
+                  cy="30"
+                  rx="170"
+                  ry="18"
+                  fill="url(#paint0_radial_heroTitle)"
+                />
+                <defs>
+                  <radialGradient
+                    id="paint0_radial_heroTitle"
+                    cx="0"
+                    cy="0"
+                    r="1"
+                    gradientTransform="translate(190 30) scale(170 18)"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stopColor="#ffe259" stopOpacity="0.7" />
+                    <stop offset="0.5" stopColor="#ffb347" stopOpacity="0.3" />
+                    <stop offset="1" stopColor="#f6416c" stopOpacity="0.1" />
+                  </radialGradient>
+                </defs>
+              </svg>
+              <h1
+                className="uppercase font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight relative z-10"
+                style={{
+                  fontFamily: "'Orbitron', 'Montserrat', sans-serif",
+                  background: 'linear-gradient(90deg, #ff6a00 0%, #ffb347 30%, #f6416c 70%, #d46fff 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  textShadow: '0 4px 32px #ffb34755, 0 1px 0 #fff6b7',
+                  letterSpacing: '0.08em',
+                  marginBottom: '0.1em',
+                  fontStyle: 'normal',
+                  fontWeight: 900,
+                  marginTop: '-0.2em',
+                  lineHeight: 1.1,
+                  textTransform: 'uppercase',
+                  transition: 'all 0.3s cubic-bezier(.4,2,.6,1)',
+                  filter: 'drop-shadow(0 2px 16px #f6416c33)',
+                }}
+              >
+                <span
+                  style={{
+                    display: 'inline-block',
+                    marginLeft: '0.4em',
+                    fontWeight: 800,
+                    fontFamily: "'Orbitron', 'Montserrat', sans-serif",
+                    letterSpacing: '0.18em',
+                    color: 'inherit',
+                    filter: 'drop-shadow(0 2px 12px #ffb34799)',
+                    textShadow: '0 2px 24px #ffb34799, 0 1px 0 #fff6b7',
+                    textTransform: 'uppercase',
+                    fontSize: '0.85em',
+                  }}
+                >
+                  timeline Switchfest
+                </span>
+              </h1>
+              {/* Animated underline accent */}
+              <div
+                className="w-32 h-2 rounded-full mt-1 mb-2"
+                style={{
+                  background: 'linear-gradient(90deg, #ffb347 0%, #f6416c 100%)',
+                  boxShadow: '0 2px 16px #ffb34755, 0 0 8px #d46fff55',
+                  animation: 'pulse-underline 2.5s infinite alternate',
+                  opacity: 0.85,
+                }}
+              />
+              <style>
+                {`
+                  @keyframes pulse-underline {
+                    0% { transform: scaleX(0.85); opacity: 0.7; }
+                    100% { transform: scaleX(1.15); opacity: 1; }
+                  }
+                `}
+              </style>
+            </div>
+            {/* Subtitle */}
             <div
-              className="w-32 h-2 rounded-full mt-1 mb-2"
+              className="text-base sm:text-lg md:text-xl font-semibold"
               style={{
-                background: 'linear-gradient(90deg, #ffb347 0%, #f6416c 100%)',
-                boxShadow: '0 2px 16px #ffb34755, 0 0 8px #d46fff55',
-                animation: 'pulse-underline 2.5s infinite alternate',
-                opacity: 0.85,
+                color: '#fffbe6',
+                textShadow: '0 2px 12px #ffb34733',
+                maxWidth: '700px',
+                margin: '0 auto',
+                lineHeight: 1.5,
+                fontFamily: "'Montserrat', 'Orbitron', sans-serif",
+                fontWeight: 600,
+                fontStyle: 'normal',
+                letterSpacing: '0.01em',
               }}
-            />
-            <style>
-              {`
-                @keyframes pulse-underline {
-                  0% { transform: scaleX(0.85); opacity: 0.7; }
-                  100% { transform: scaleX(1.15); opacity: 1; }
-                }
-              `}
-            </style>
-          </div>
-          {/* Subtitle */}
-          <div
-            className="text-base sm:text-lg md:text-xl font-semibold"
-            style={{
-              color: '#fffbe6',
-              textShadow: '0 2px 12px #ffb34733',
-              maxWidth: '700px',
-              margin: '0 auto',
-              lineHeight: 1.5,
-              fontFamily: "'Montserrat', 'Orbitron', sans-serif",
-              fontWeight: 600,
-              fontStyle: 'normal',
-              letterSpacing: '0.01em',
-            }}
-          >
-            Ikuti perjalanan Switchfest 2025 mulai dari pendaftaran hingga awarding night!
+            >
+              Ikuti perjalanan Switchfest 2025 mulai dari pendaftaran hingga awarding night!
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Konten Timeline dengan 4 item spotlight yang diatur secara horizontal */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-y-32 md:gap-y-0 w-full max-w-7xl mx-auto flex-1">
-        {visibleItems.map((item, idx) => (
-          <TimelineItem key={startIndex + idx} title={item.title} description={item.description} />
-        ))}
-      </div>
+        {/* Konten Timeline dengan 4 item spotlight yang diatur secara horizontal */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-y-32 md:gap-y-0 w-full max-w-7xl mx-auto flex-1">
+          {visibleItems.map((item, idx) => (
+            <TimelineItem key={startIndex + idx} title={item.title} description={item.description} />
+          ))}
+        </div>
 
-      {/* Kontrol bawah dan progress bar */}
-      <div className="flex items-center justify-between mt-8 md:mt-12 w-full max-w-7xl mx-auto flex-shrink-0">
-        {/* Tombol "SEBELUMNYA" */}
-        <TimelineButton
-          onClick={handlePrev}
-          disabled={currentPage === 0}
-          icon={
-            <svg
-              fill="none"
-              viewBox="0 0 8 12"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              className="w-4 h-4"
-            >
-              <path
-                d="M7 1L1 6L7 11"
-                stroke="#ff6a00"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          }
-          reverse
-        >
-          SEBELUMNYA
-        </TimelineButton>
+        {/* Spacer agar pagination benar-benar di bawah konten */}
+        <div className="flex-1" />
 
-        {/* Progress bar */}
+        {/* Kontrol bawah dan progress bar - ditempel ke bawah section */}
         <div
-          className="flex-1 mx-8 h-1.5 rounded-full"
+          className="w-full max-w-2xl mx-auto flex items-center justify-between mt-8 md:mt-12 pb-0"
           style={{
-            background:
-              'linear-gradient(90deg, #ff6a00 0%, #ffb347 40%, #f6416c 80%, #d46fff 100%)',
-            boxShadow: '0 0 16px #ffb34766',
-            opacity: 0.85,
+            marginTop: 'auto',
+            paddingBottom: '0',
+            background: 'none',
+            gap: '1.25rem',
           }}
-        />
-
-        {/* Tombol "SELANJUTNYA" */}
-        <TimelineButton
-          onClick={handleNext}
-          disabled={currentPage === totalPages - 1}
-          icon={
-            <svg
-              fill="none"
-              viewBox="0 0 8 12"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              className="w-4 h-4"
-            >
-              <path
-                d="M1 1L7 6L1 11"
-                stroke="#ff6a00"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          }
         >
-          SELANJUTNYA
-        </TimelineButton>
+          {/* Tombol "SEBELUMNYA" */}
+          <TimelineButton
+            onClick={handlePrev}
+            disabled={currentPage === 0}
+            icon={
+              <svg
+                fill="none"
+                viewBox="0 0 8 12"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                className="w-4 h-4"
+              >
+                <path
+                  d="M7 1L1 6L7 11"
+                  stroke="#ff6a00"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            }
+            reverse
+          >
+            prev
+          </TimelineButton>
+
+          {/* Progress bar */}
+          <div
+            className="flex-1 mx-6 h-1.5 rounded-full flex"
+            style={{
+              minWidth: 240,
+              maxWidth: 520,
+              boxShadow: '0 0 16px #ffb34766',
+              opacity: 0.85,
+              position: 'relative',
+              overflow: 'hidden',
+              background: '#232323', // fallback bg
+            }}
+          >
+            {/* Segmented progress bar with smooth fill animation */}
+            {Array.from({ length: totalPages }).map((_, idx) => {
+              // Define gradient for each segment
+              const gradients = [
+                'linear-gradient(90deg, #ff6a00 0%, #ffb347 100%)',
+                'linear-gradient(90deg, #ffb347 0%, #f6416c 100%)',
+                'linear-gradient(90deg, #f6416c 0%, #d46fff 100%)',
+                'linear-gradient(90deg, #d46fff 0%, #ff6a00 100%)',
+                // Add more if totalPages > 4, or repeat
+              ];
+              const isActive = idx < currentPage;
+              const isCurrent = idx === currentPage;
+              return (
+                <div
+                  key={idx}
+                  style={{
+                    flex: 1,
+                    height: '100%',
+                    position: 'relative',
+                    borderRadius: idx === 0
+                      ? totalPages === 1
+                        ? '9999px'
+                        : '9999px 0 0 9999px'
+                      : idx === totalPages - 1
+                        ? '0 9999px 9999px 0'
+                        : '0',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {/* Filled part */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      height: '100%',
+                      width: isActive ? '100%' : isCurrent ? '100%' : '0%',
+                      background: gradients[idx % gradients.length],
+                      opacity: isActive ? 1 : isCurrent ? 1 : 0.15,
+                      transition: isCurrent
+                        ? 'width 0.6s cubic-bezier(.4,2,.6,1), opacity 0.4s'
+                        : 'opacity 0.4s',
+                      boxShadow: isActive || isCurrent ? '0 0 12px #f6416c55' : 'none',
+                      zIndex: 2,
+                      willChange: 'width, opacity',
+                      // Animate scale for current segment
+                      transform: isCurrent && isActive
+                        ? 'scaleY(1.18)'
+                        : isCurrent
+                        ? 'scaleY(1.12)'
+                        : 'scaleY(1)',
+                      transitionProperty: 'width, opacity, transform',
+                    }}
+                  />
+                  {/* Unfilled background for inactive segments */}
+                  {!isActive && !isCurrent && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        height: '100%',
+                        width: '100%',
+                        background: gradients[idx % gradients.length],
+                        opacity: 0.15,
+                        zIndex: 1,
+                        transition: 'opacity 0.4s',
+                      }}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Tombol "SELANJUTNYA" */}
+          <TimelineButton
+            onClick={handleNext}
+            disabled={currentPage === totalPages - 1}
+            icon={
+              <svg
+                fill="none"
+                viewBox="0 0 8 12"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                className="w-4 h-4"
+              >
+                <path
+                  d="M1 1L7 6L1 11"
+                  stroke="#ff6a00"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            }
+          >
+            next
+          </TimelineButton>
+        </div>
+        {/* Spacer bawah agar pagination tidak terlalu nempel ke bawah */}
+        <div style={{ height: '3.5rem' }} />
       </div>
+
+      {/* Extra Animations */}
+      <style>{`
+        @keyframes gradient-slow {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-slow {
+          animation: gradient-slow 18s ease infinite;
+        }
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.4; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 8s ease-in-out infinite;
+        }
+        .animate-pulse-slower {
+          animation: pulse-slow 12s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };
