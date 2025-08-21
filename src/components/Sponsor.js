@@ -37,6 +37,7 @@ const sponsorLogoFiles = [
   "POJOK EVENT.png",
   "PUSAT INFO LOMBA.png",
   "SANDEC.png",
+  "TEKNO EVENT.png",
 ];
 
 // Helper: generate image src and alt from filename
