@@ -1,33 +1,103 @@
 import React, { useState } from 'react';
 
 const Timeline = () => {
-  // Data timeline yang baru dengan detail untuk setiap kategori.
-  const TIMELINE_ITEMS = [
-    { title: 'UI/UX & WEB', description: 'Jadwal lengkap untuk kompetisi UI/UX dan Web.' },
-    { title: 'Batch 1', description: '21 Agustus - 7 September' },
-    { title: 'Batch 2', description: '8 September - 5 Oktober' },
-    { title: 'Penyisihan', description: '6 Oktober - 8 Oktober' },
-    { title: 'Pengumuman', description: '9 Oktober' },
-    { title: 'TM', description: '10 Oktober' },
-    { title: 'Final UI/UX', description: '13 Oktober' },
-    { title: 'Final Web', description: '14 Oktober' },
-    { title: 'Pengumuman Juara', description: '17 Oktober' },
-    { title: 'POSTER', description: 'Jadwal lengkap untuk kompetisi Poster.' },
-    { title: 'Batch 1', description: '21 Agustus - 4 September' },
-    { title: 'Batch 2', description: '5 September - 26 September' },
-    { title: 'Penilaian', description: '27 September - 28 September' },
-    { title: 'Pengumuman', description: '2 Oktober' },
+  // Data timeline terstruktur per kategori, dengan kata-kata yang lebih menarik
+  const TIMELINE_DATA = [
+    {
+      category: "UI/UX & Web",
+      color: "from-orange-400 via-pink-500 to-purple-500",
+      items: [
+        {
+          title: "Batch 1",
+          date: "21 Agustus - 7 September",
+          desc: "Pendaftaran gelombang pertama dibuka! Segera daftarkan tim terbaikmu dan mulai perjalanan inovasimu."
+        },
+        {
+          title: "Batch 2",
+          date: "8 September - 5 Oktober",
+          desc: "Kesempatan kedua! Jangan lewatkan batch terakhir untuk menjadi bagian dari kompetisi seru ini."
+        },
+        {
+          title: "Penyisihan",
+          date: "6 Oktober - 8 Oktober",
+          desc: "Saatnya unjuk gigi! Tunjukkan karya terbaikmu di babak penyisihan dan buktikan kemampuanmu."
+        },
+        {
+          title: "Pengumuman",
+          date: "9 Oktober",
+          desc: "Siapakah yang lolos ke tahap berikutnya? Pantau pengumuman dan tetap semangat!"
+        },
+        {
+          title: "Technical Meeting",
+          date: "10 Oktober",
+          desc: "Persiapkan dirimu! Dapatkan info penting dan tips sukses di technical meeting."
+        },
+        {
+          title: "Final UI/UX",
+          date: "13 Oktober",
+          desc: "Puncak kreativitas! Finalis UI/UX beradu ide dan inovasi di babak grand final."
+        },
+        {
+          title: "Final Web",
+          date: "14 Oktober",
+          desc: "Saatnya para web developer membuktikan kehebatannya di final kompetisi Web."
+        },
+        {
+          title: "Pengumuman Juara",
+          date: "17 Oktober",
+          desc: "Momen penentuan! Saksikan siapa yang akan menjadi juara Switchfest 2025."
+        }
+      ]
+    },
+    {
+      category: "Poster",
+      color: "from-yellow-400 via-pink-400 to-purple-400",
+      items: [
+        {
+          title: "Batch 1",
+          date: "21 Agustus - 4 September",
+          desc: "Pendaftaran batch pertama dibuka! Tunjukkan ide kreatifmu lewat poster digital."
+        },
+        {
+          title: "Batch 2",
+          date: "5 September - 26 September",
+          desc: "Masih ada kesempatan! Daftarkan karyamu di batch kedua dan bersaing dengan peserta lainnya."
+        },
+        {
+          title: "Penilaian",
+          date: "27 September - 28 September",
+          desc: "Karya-karya terbaik akan dinilai oleh dewan juri profesional. Siapkan yang terbaik!"
+        },
+        {
+          title: "Pengumuman",
+          date: "2 Oktober",
+          desc: "Saat yang dinanti! Temukan siapa saja yang berhasil menembus persaingan ketat."
+        }
+      ]
+    }
   ];
 
-  // State untuk melacak halaman saat ini.
+  // State untuk memilih kategori timeline (UI/UX & Web atau Poster)
+  const [selectedCategory, setSelectedCategory] = useState(0);
+
+  // State untuk pagination per kategori
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 4;
-  const totalPages = Math.ceil(TIMELINE_ITEMS.length / itemsPerPage);
 
-  // Mengatur item yang ditampilkan berdasarkan halaman saat ini.
+  // Data aktif sesuai kategori
+  const activeTimeline = TIMELINE_DATA[selectedCategory];
+  const totalPages = Math.ceil(activeTimeline.items.length / itemsPerPage);
+
+  // Pagination logic
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleItems = TIMELINE_ITEMS.slice(startIndex, endIndex);
+  const visibleItems = activeTimeline.items.slice(startIndex, endIndex);
+
+  // Handler untuk navigasi kategori
+  const handleCategoryChange = (idx) => {
+    setSelectedCategory(idx);
+    setCurrentPage(0);
+  };
 
   // Handler untuk tombol "SELANJUTNYA"
   const handleNext = () => {
@@ -39,13 +109,20 @@ const Timeline = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 0));
   };
 
-  // Komponen individu untuk setiap item timeline.
-  const TimelineItem = ({ title, description }) => (
-    <div className="relative w-full md:w-[22%] flex flex-col items-center text-center">
-      {/* Container utama untuk teks judul dan deskripsi */}
-      <div className="relative z-10 w-[170px] mb-4">
+  // Komponen Card Timeline
+  const TimelineCard = ({ title, date, desc, idx }) => (
+    <div className="relative w-full md:w-[22%] flex flex-col items-center text-center group">
+      {/* Card utama */}
+      <div
+        className="relative z-10 w-[210px] h-[230px] mb-4 p-5 rounded-2xl bg-gradient-to-br from-[#232323cc] to-[#1c1c1cbb] border-2 border-[#ffb34744] shadow-lg group-hover:scale-105 transition-transform duration-300 flex flex-col"
+        style={{
+          minHeight: '230px', // tinggi tetap
+          maxHeight: '230px',
+          boxSizing: 'border-box',
+        }}
+      >
         <div
-          className="text-base md:text-lg leading-tight mb-3 font-extrabold uppercase"
+          className="text-lg md:text-xl font-extrabold uppercase mb-2"
           style={{
             fontFamily: "'Montserrat', 'Orbitron', sans-serif",
             background: 'linear-gradient(90deg, #ff6a00 0%, #ffb347 40%, #f6416c 80%, #d46fff 100%)',
@@ -60,18 +137,34 @@ const Timeline = () => {
           {title}
         </div>
         <div
-          className="text-xs md:text-sm font-medium leading-relaxed"
+          className="text-xs md:text-sm font-semibold mb-2"
           style={{
-            color: '#fffbe6',
+            color: '#ffe259',
             textShadow: '0 1px 8px #ffb34733, 0 0px 1px #232323',
             fontFamily: "'Montserrat', 'Orbitron', sans-serif",
             letterSpacing: '0.01em',
           }}
         >
-          {description}
+          {date}
+        </div>
+        <div
+          className="text-xs md:text-sm font-medium leading-relaxed flex-1 flex items-center justify-center"
+          style={{
+            color: '#fffbe6',
+            textShadow: '0 1px 8px #ffb34733, 0 0px 1px #232323',
+            fontFamily: "'Montserrat', 'Orbitron', sans-serif",
+            letterSpacing: '0.01em',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: '-webkit-box',
+            WebkitLineClamp: 4,
+            WebkitBoxOrient: 'vertical',
+          }}
+        >
+          {desc}
         </div>
       </div>
-      {/* Efek cahaya "spotlight" berbentuk elips */}
+      {/* Efek spotlight */}
       <div
         className="mt-6 relative z-[2]"
         style={{
@@ -125,7 +218,7 @@ const Timeline = () => {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`flex items-center gap-2 border rounded text-[#232323] text-xs md:text-sm select-none transition-all duration-300 ease-in-out ${
+      className={`flex items-center justify-center gap-1.5 md:gap-2 border rounded text-[#232323] text-xs md:text-sm select-none transition-all duration-300 ease-in-out ${
         disabled
           ? 'opacity-50 cursor-not-allowed'
           : 'hover:shadow-[0_0_24px_#ffb34799] hover:scale-105 cursor-pointer'
@@ -133,7 +226,7 @@ const Timeline = () => {
       style={{
         fontFamily: "'Montserrat', 'Orbitron', sans-serif",
         textTransform: 'uppercase',
-        padding: '0.5rem 1.2rem',
+        padding: '0.45rem 0.8rem',
         background: 'linear-gradient(90deg, #ffe259 0%, #ff6a00 100%)',
         borderColor: '#ffb347',
         boxShadow: '0 2px 12px #ffb34733',
@@ -141,11 +234,19 @@ const Timeline = () => {
         fontWeight: 700,
         letterSpacing: '0.08em',
         backdropFilter: 'blur(2px)',
+        minWidth: 80,
+        minHeight: 36,
+        width: '100%',
+        maxWidth: 140,
       }}
     >
-      {reverse && icon}
-      <span>{children}</span>
-      {!reverse && icon}
+      {reverse && (
+        <span className="flex items-center">{icon}</span>
+      )}
+      <span className="truncate">{children}</span>
+      {!reverse && (
+        <span className="flex items-center">{icon}</span>
+      )}
     </button>
   );
 
@@ -179,7 +280,6 @@ const Timeline = () => {
             {/* Judul Utama */}
             <div
               className="relative flex flex-col items-center w-full timeline-title-wrapper"
-              // Remove negative marginTop, let CSS handle spacing
             >
               {/* Decorative SVG background for the title */}
               <svg
@@ -229,7 +329,6 @@ const Timeline = () => {
                   marginBottom: '0.1em',
                   fontStyle: 'normal',
                   fontWeight: 900,
-                  // Remove negative marginTop, let CSS handle spacing
                   marginTop: 0,
                   lineHeight: 1.1,
                   textTransform: 'uppercase',
@@ -270,7 +369,6 @@ const Timeline = () => {
                     0% { transform: scaleX(0.85); opacity: 0.7; }
                     100% { transform: scaleX(1.15); opacity: 1; }
                   }
-                  /* Tambahan: Jaga jarak judul dari atas pada mobile */
                   @media (max-width: 640px) {
                     .timeline-title-wrapper {
                       margin-top: 2.5rem !important;
@@ -278,7 +376,7 @@ const Timeline = () => {
                   }
                   @media (min-width: 641px) {
                     .timeline-title-wrapper {
-                      margin-top: 0 !important;
+                      margin-top: -2.5rem !important;
                     }
                   }
                 `}
@@ -286,7 +384,7 @@ const Timeline = () => {
             </div>
             {/* Subtitle */}
             <div
-              className="text-base sm:text-lg md:text-xl font-semibold"
+              className="text-sm sm:text-base md:text-lg font-semibold"
               style={{
                 color: '#fffbe6',
                 textShadow: '0 2px 12px #ffb34733',
@@ -297,26 +395,65 @@ const Timeline = () => {
                 fontWeight: 600,
                 fontStyle: 'normal',
                 letterSpacing: '0.01em',
+                fontSize: '1rem', // fallback for text-sm
               }}
             >
-              Ikuti perjalanan Switchfest 2025 mulai dari pendaftaran hingga awarding night!
+              Jadilah bagian dari perjalanan luar biasa Switchfest 2025! Temukan setiap momen penting dari pendaftaran hingga awarding night, dan wujudkan prestasi terbaikmu bersama kami.
             </div>
           </div>
         </div>
 
-        {/* Konten Timeline dengan 4 item spotlight yang diatur secara horizontal */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-y-32 md:gap-y-0 w-full max-w-7xl mx-auto flex-1">
+        {/* Tab kategori */}
+        <div className="flex justify-center gap-2 mb-4 -mt-6">
+          {TIMELINE_DATA.map((cat, idx) => (
+            <button
+              key={cat.category}
+              onClick={() => handleCategoryChange(idx)}
+              className={`px-3 py-1.5 rounded-full font-bold uppercase text-xs md:text-sm transition-all duration-200 border-2 ${
+                selectedCategory === idx
+                  ? "bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 text-white border-transparent shadow-lg scale-105"
+                  : "bg-[#181818] text-[#ffb347] border-[#ffb34755] hover:bg-[#232323] hover:scale-105"
+              }`}
+              style={{
+                fontFamily: "'Montserrat', 'Orbitron', sans-serif",
+                letterSpacing: '0.08em',
+                boxShadow: selectedCategory === idx ? '0 2px 12px #ffb34755' : undefined,
+                fontSize: '0.92rem',
+              }}
+            >
+              {cat.category}
+            </button>
+          ))}
+        </div>
+
+        {/* Tagline kategori */}
+        <div
+          className="text-sm md:text-base font-semibold mb-8 text-center"
+          style={{
+            color: '#ffe259',
+            textShadow: '0 2px 12px #ffb34733',
+            fontFamily: "'Montserrat', 'Orbitron', sans-serif",
+            letterSpacing: '0.01em',
+            maxWidth: 600,
+            margin: '0 auto',
+          }}
+        >
+          {activeTimeline.tagline}
+        </div>
+
+        {/* Konten Timeline dengan card */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-y-32 md:gap-y-0 w-full max-w-7xl mx-auto flex-1 mb-5 md:mb-10">
           {visibleItems.map((item, idx) => (
-            <TimelineItem key={startIndex + idx} title={item.title} description={item.description} />
+            <TimelineCard key={startIndex + idx} {...item} idx={startIndex + idx} />
           ))}
         </div>
 
         {/* Spacer agar pagination benar-benar di bawah konten */}
         <div className="flex-1" />
 
-        {/* Kontrol bawah dan progress bar - ditempel ke bawah section */}
+        {/* Kontrol bawah dan progress bar */}
         <div
-          className="w-full max-w-2xl mx-auto flex items-center justify-between mt-8 md:mt-12 pb-0"
+          className="w-full max-w-2xl mx-auto flex items-center justify-between mt-16 md:mt-24 pb-0"
           style={{
             marginTop: 'auto',
             paddingBottom: '0',
@@ -352,26 +489,32 @@ const Timeline = () => {
 
           {/* Progress bar */}
           <div
-            className="flex-1 mx-6 h-1.5 rounded-full flex"
+            className={`
+              flex-1 
+              h-1.5 
+              rounded-full 
+              flex 
+              mx-2 
+              sm:mx-4 
+              md:mx-6
+            `}
             style={{
-              minWidth: 240,
+              minWidth: '0',
+              width: '100%',
               maxWidth: 520,
               boxShadow: '0 0 16px #ffb34766',
               opacity: 0.85,
               position: 'relative',
               overflow: 'hidden',
-              background: '#232323', // fallback bg
+              background: '#232323',
             }}
           >
-            {/* Segmented progress bar with smooth fill animation */}
             {Array.from({ length: totalPages }).map((_, idx) => {
-              // Define gradient for each segment
               const gradients = [
                 'linear-gradient(90deg, #ff6a00 0%, #ffb347 100%)',
                 'linear-gradient(90deg, #ffb347 0%, #f6416c 100%)',
                 'linear-gradient(90deg, #f6416c 0%, #d46fff 100%)',
                 'linear-gradient(90deg, #d46fff 0%, #ff6a00 100%)',
-                // Add more if totalPages > 4, or repeat
               ];
               const isActive = idx < currentPage;
               const isCurrent = idx === currentPage;
@@ -380,6 +523,7 @@ const Timeline = () => {
                   key={idx}
                   style={{
                     flex: 1,
+                    minWidth: 0,
                     height: '100%',
                     position: 'relative',
                     borderRadius: idx === 0
@@ -408,7 +552,6 @@ const Timeline = () => {
                       boxShadow: isActive || isCurrent ? '0 0 12px #f6416c55' : 'none',
                       zIndex: 2,
                       willChange: 'width, opacity',
-                      // Animate scale for current segment
                       transform: isCurrent && isActive
                         ? 'scaleY(1.18)'
                         : isCurrent
@@ -464,7 +607,7 @@ const Timeline = () => {
           </TimelineButton>
         </div>
         {/* Spacer bawah agar pagination tidak terlalu nempel ke bawah */}
-        <div style={{ height: '3.5rem' }} />
+        <div style={{ height: '2.3rem' }} />
       </div>
 
       {/* Extra Animations */}
