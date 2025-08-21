@@ -436,16 +436,36 @@ const Hero = () => {
   const [showJuklak, setShowJuklak] = useState(false);
 
   const popupDaftarItems = [
-    { nama: "Web Development", link: "https://bit.ly/WebDevelopment_SwitchFest2025" },
-    { nama: "UI/UX Design", link: "https://bit.ly/UIUX-Design_SwitchFest2025" },
-    { nama: "Design Poster", link: "https://bit.ly/Poster_SwitchFest2025" },
+    {
+      nama: "Web Development",
+      link: "https://bit.ly/WebDevelopment_SwitchFest2025"
+    },
+    {
+      nama: "UI/UX Design",
+      link: "https://bit.ly/UIUX-Design_SwitchFest2025"
+    },
+    {
+      nama: "Design Poster",
+      link: "https://bit.ly/Poster_SwitchFest2025"
+    },
   ];
 
   const popupJuklakItems = [
-    { nama: "Juklak Web Development", link: "https://drive.google.com/file/d/1rV78hl8eH_G8Xsesh2GYKeZdtcZ1PWE8/view?usp=drivesdk" },
-    { nama: "Juklak UI/UX Design", link: "https://drive.google.com/file/d/1rZTCCTislsKIVzmgR4KA3HhXURgdvR3c/view?usp=drivesdk" },
-    { nama: "Juklak Design Poster", link: "https://drive.google.com/file/d/1raJxSQHiBYjSplEpzvC3qS4P0AMl1dC8/view?usp=drivesdk" },
+    {
+      nama: "Juklak Web Development",
+      link: "https://drive.google.com/file/d/1ve29XMamqWfeevCN7htFM6XCHo8tAL5i/view?usp=drivesdk"
+    },
+    {
+      nama: "Juklak UI/UX Design",
+      link: "https://drive.google.com/file/d/1vadpN8UT0icQn3SCuflCTc6di7DFLgwQ/view?usp=drivesdk"
+    },
+    {
+      nama: "Juklak Design Poster",
+      link: "https://drive.google.com/file/d/1vi1-bds6tkxZTdSDhCAP7OWfMt0iFLtn/view?usp=drivesdk"
+    },
   ];
+
+  // Tidak perlu lock scroll pada body, biarkan scroll tetap aktif saat popup muncul
 
   return (
     <section className="relative h-screen flex flex-col justify-center items-center px-4 md:px-20 pt-16 md:pt-32 overflow-hidden bg-gradient-to-br from-orange-100 via-orange-200 to-orange-300">
@@ -473,12 +493,14 @@ const Hero = () => {
         setShowModal={setShowDaftar}
         label="Perlombaan"
         items={popupDaftarItems}
+        // scroll pada body tetap aktif saat popup muncul
       />
       <PopupButton
         showModal={showJuklak}
         setShowModal={setShowJuklak}
         label="Juklak-Juknis"
         items={popupJuklakItems}
+        // scroll pada body tetap aktif saat popup muncul
       />
     </section>
   );

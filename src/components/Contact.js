@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 
-const whatsappNumber = '6289529684820'; // No WA tujuan tanpa tanda +
+const whatsappNumber = '6285727040539'; // No WA tujuan tanpa tanda +
 const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
 const Contact = () => {

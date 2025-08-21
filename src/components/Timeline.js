@@ -168,10 +168,19 @@ const Timeline = () => {
       {/* Content wrapper */}
       <div className="relative z-10 flex flex-col w-full h-full flex-1">
         {/* Header dan Container Utama Timeline */}
-        <div className="relative w-full text-center mb-6 md:mb-8 flex-shrink-0" style={{ marginTop: 0, paddingTop: 0 }}>
+        <div
+          className="relative w-full text-center mb-6 md:mb-8 flex-shrink-0"
+          style={{
+            marginTop: 0,
+            paddingTop: 0,
+          }}
+        >
           <div className="flex flex-col items-center gap-2">
             {/* Judul Utama */}
-            <div className="relative flex flex-col items-center w-full" style={{ marginTop: '-2.5rem' }}>
+            <div
+              className="relative flex flex-col items-center w-full timeline-title-wrapper"
+              // Remove negative marginTop, let CSS handle spacing
+            >
               {/* Decorative SVG background for the title */}
               <svg
                 width="380"
@@ -220,7 +229,8 @@ const Timeline = () => {
                   marginBottom: '0.1em',
                   fontStyle: 'normal',
                   fontWeight: 900,
-                  marginTop: '-0.2em',
+                  // Remove negative marginTop, let CSS handle spacing
+                  marginTop: 0,
                   lineHeight: 1.1,
                   textTransform: 'uppercase',
                   transition: 'all 0.3s cubic-bezier(.4,2,.6,1)',
@@ -259,6 +269,17 @@ const Timeline = () => {
                   @keyframes pulse-underline {
                     0% { transform: scaleX(0.85); opacity: 0.7; }
                     100% { transform: scaleX(1.15); opacity: 1; }
+                  }
+                  /* Tambahan: Jaga jarak judul dari atas pada mobile */
+                  @media (max-width: 640px) {
+                    .timeline-title-wrapper {
+                      margin-top: 2.5rem !important;
+                    }
+                  }
+                  @media (min-width: 641px) {
+                    .timeline-title-wrapper {
+                      margin-top: 0 !important;
+                    }
                   }
                 `}
               </style>

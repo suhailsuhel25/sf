@@ -40,13 +40,13 @@ const Footer = () => {
             <span className="text-xs md:text-sm text-gray-100 font-medium break-all">@switchfest_</span>
           </a>
           <a
-            href="https://wa.me/6289529684820"
+            href="https://wa.me/6285727040539"
             className="flex items-center gap-2 bg-[#232323] bg-opacity-60 border border-[#25d36633] hover:bg-opacity-80 transition px-2.5 py-1.5 md:px-3 md:py-1.5 rounded-lg w-full md:w-fit"
             style={{ boxShadow: '0 1px 8px #25d36622' }}
             target="_blank" rel="noopener noreferrer"
           >
             <BsWhatsapp className="text-green-400" size={16} />
-            <span className="text-xs md:text-sm text-gray-100 font-medium break-all">+62 895-2968-4820</span>
+            <span className="text-xs md:text-sm text-gray-100 font-medium break-all">+62 857-2704-0539</span>
           </a>
         </div>
       </div>

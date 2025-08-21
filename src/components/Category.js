@@ -1,110 +1,6 @@
 
 import { useState, memo } from 'react';
-
-// Competition card as a memoized component
-const CompetitionCard = memo(function CompetitionCard({ comp, index, activeCard, setActiveCard }) {
-    return (
-        <div
-            key={comp.id}
-            className="group relative rounded-3xl p-8 transition-all duration-500 hover:scale-105 hover:border-white/20 cursor-pointer border border-white/10"
-            onMouseEnter={() => setActiveCard(comp.id)}
-            onMouseLeave={() => setActiveCard(null)}
-            style={{
-                animation: `slideInUp 0.8s ease-out ${index * 0.2}s both`,
-                background: comp.bgGradient,
-                boxShadow: '0 8px 32px 0 rgba(31,41,55,0.18), 0 1.5px 8px 0 rgba(255, 107, 0, 0.08)'
-            }}
-        >
-
-            {/* Card Glow Effect */}
-            <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity duration-500 pointer-events-none"
-                style={{ background: comp.gradient }}
-            ></div>
-
-            {/* Floating Badge */}
-            <div className="absolute -top-4 -right-4 z-10">
-                <div
-                    className="px-4 py-2 rounded-2xl shadow-xl transform rotate-12 group-hover:rotate-0 transition-transform duration-300"
-                    style={{ background: comp.gradient, color: '#fff' }}
-                >
-                    <span className="text-sm font-bold">{comp.level}</span>
-                </div>
-            </div>
-
-            {/* Icon Container */}
-            <div
-                className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-2xl group-hover:shadow-3xl group-hover:scale-110 transition-all duration-300 relative overflow-hidden"
-                style={{ background: comp.iconBg }}
-            >
-                {/* Icon Shine Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-y-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-                <div className="relative z-10">{comp.icon}</div>
-            </div>
-
-            {/* Content */}
-            <div className="space-y-4">
-                <div>
-                    <h3
-                        className="text-2xl font-bold mb-1 group-hover:text-[#fff6b7] transition-colors"
-                        style={{ color: '#fff' }}
-                    >
-                        {comp.title}
-                    </h3>
-                    <p
-                        className="text-sm font-semibold bg-clip-text text-transparent"
-                        style={{
-                            background: comp.gradient,
-                            WebkitBackgroundClip: 'text',
-                            backgroundClip: 'text'
-                        }}
-                    >
-                        {comp.subtitle}
-                    </p>
-                </div>
-
-                <p className="leading-relaxed text-sm" style={{ color: '#fff7ed' }}>{comp.description}</p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                    {comp.tags.map((tag, i) => (
-                        <span
-                            key={i}
-                            className="px-3 py-1 text-xs rounded-full border"
-                            style={{ background: '#2d2d2d', color: '#ffe259', borderColor: '#ffb347' }}
-                        >
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-
-                {/* CTA Button */}
-                <a
-                    href="https://drive.google.com/drive/folders/1wQbYKT1eZq9VHtV6nRvWmvMRGsiE9zra?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full text-center py-4 px-6 font-bold rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group/btn"
-                    style={{ background: comp.gradient, color: '#fff' }}
-                >
-                    {/* Overlay glassmorphism hover konsisten semua card (seperti design poster) */}
-                    <div className="absolute inset-0 pointer-events-none transition-all duration-300 group-hover/btn:opacity-100 opacity-0 rounded-2xl backdrop-blur-md border border-white/20" style={{ background: 'rgba(255,255,255,0.22)' }}></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 translate-x-[-100%] group-hover/btn:translate-x-[200%] transition-transform duration-1000"></div>
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                        Join Battle
-                        <svg width="16" height="16" fill="none" viewBox="0 0 16 16" className="transition-transform group-hover/btn:translate-x-1">
-                            <path d="M8 1l3 3-3 3M11 4H1M8 9l3 3-3 3M11 12H1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                        </svg>
-                    </span>
-                </a>
-            </div>
-
-            {/* Active Card Indicator */}
-            {activeCard === comp.id && (
-                <div className="absolute inset-0 border-2 border-white/30 rounded-3xl pointer-events-none animate-pulse"></div>
-            )}
-        </div>
-    );
-});
+import PopupButton from './PopupButton';
 
 // Data kompetisi
 const competitions = [
@@ -118,25 +14,17 @@ const competitions = [
         bgGradient: 'linear-gradient(135deg, #232323 0%, #2d2d2d 60%, #ff6a00 100%)',
         iconBg: 'linear-gradient(135deg, #ff9800 0%, #ffb347 100%)',
         tags: [],
-        // Icon: Web/Code
         icon: (
-            // Website/Browser window icon (SVG diperbesar)
             <svg width="70" height="70" fill="none" viewBox="0 0 32 32">
-                {/* Outer browser window */}
                 <rect x="4" y="8" width="24" height="16" rx="2.5" fill="#ffb347" opacity="0.18" />
                 <rect x="6" y="10" width="20" height="12" rx="1.5" fill="#ff9800" />
-                {/* Browser top bar */}
                 <rect x="6" y="10" width="20" height="3" rx="1.5" fill="#ffb347" />
-                {/* Browser buttons */}
                 <circle cx="8.5" cy="11.5" r="0.7" fill="#fff" opacity="0.7" />
                 <circle cx="11" cy="11.5" r="0.7" fill="#fff" opacity="0.7" />
                 <circle cx="13.5" cy="11.5" r="0.7" fill="#fff" opacity="0.7" />
-                {/* Website content: header */}
                 <rect x="9" y="15" width="14" height="2" rx="1" fill="#fff" opacity="0.9" />
-                {/* Website content: lines */}
                 <rect x="9" y="18.5" width="10" height="1.2" rx="0.6" fill="#fff" opacity="0.7" />
                 <rect x="9" y="21" width="7" height="1.2" rx="0.6" fill="#fff" opacity="0.5" />
-                {/* Website content: image placeholder */}
                 <rect x="21" y="18.5" width="2" height="3.7" rx="1" fill="#fff" opacity="0.5" />
             </svg>
         )
@@ -147,18 +35,18 @@ const competitions = [
         subtitle: 'Creative Design Battle',
         description: 'Tunjukkan kreativitasmu dalam merancang antarmuka dan pengalaman pengguna yang memukau dan user-friendly!',
         level: 'Creative',
-        gradient: 'linear-gradient(90deg, #ffe259 0%, #fff6b7 100%)',
-        bgGradient: 'linear-gradient(135deg, #232323 0%, #2d2d2d 60%, #ffe259 100%)',
-        iconBg: 'linear-gradient(135deg, #ffe259 0%, #fff6b7 100%)',
+        gradient: 'linear-gradient(90deg, #ffd600 0%, #ffe082 100%)', // warna kuning lebih gelap
+        bgGradient: 'linear-gradient(135deg, #232323 0%, #2d2d2d 60%, #ffd600 100%)',
+        iconBg: 'linear-gradient(135deg, #ffd600 0%, #ffe082 100%)',
         tags: [],
         // Icon: UI/UX (layout, pen, or similar)
         icon: (
             <svg width="70" height="70" fill="none" viewBox="0 0 32 32">
-                <rect x="8" y="6" width="16" height="20" rx="3" fill="#ffe259" opacity="0.2" />
-                <rect x="10" y="8" width="12" height="16" rx="2" fill="#fff6b7" />
+                <rect x="8" y="6" width="16" height="20" rx="3" fill="#ffd600" opacity="0.2" />
+                <rect x="10" y="8" width="12" height="16" rx="2" fill="#ffe082" />
                 <rect x="12" y="10" width="8" height="4" rx="1" fill="#fff" />
-                <rect x="12" y="16" width="6" height="1.5" rx="0.75" fill="#ffe259" />
-                <circle cx="16" cy="22" r="2" fill="#ffe259" />
+                <rect x="12" y="16" width="6" height="1.5" rx="0.75" fill="#ffd600" />
+                <circle cx="16" cy="22" r="2" fill="#ffd600" />
                 <rect x="14.5" y="20.5" width="3" height="3" rx="1.5" stroke="#ffb347" strokeWidth="1" />
             </svg>
         )
@@ -187,10 +75,162 @@ const competitions = [
     }
 ];
 
+// Define unique popup items for each competition
+const popupItemsByCompId = {
+    web: [
+        {
+            nama: 'Daftar Lomba',
+            link: 'https://bit.ly/WebDevelopment_SwitchFest2025',
+        },
+        {
+            nama: 'Lihat Juklak',
+            link: 'https://drive.google.com/file/d/1ve29XMamqWfeevCN7htFM6XCHo8tAL5i/view?usp=drivesdk',
+        },
+    ],
+    uiux: [
+        {
+            nama: 'Daftar Lomba',
+            link: 'https://bit.ly/UIUX-Design_SwitchFest2025',
+        },
+        {
+            nama: 'Lihat Juklak',
+            link: 'https://drive.google.com/file/d/1vadpN8UT0icQn3SCuflCTc6di7DFLgwQ/view?usp=drivesdk',
+        },
+    ],
+    poster: [
+
+        {
+            nama: 'Daftar Lomba',
+            link: 'https://bit.ly/Poster_SwitchFest2025',
+        },
+        {
+            nama: 'Lihat Juklak',
+            link: 'https://drive.google.com/file/d/1vi1-bds6tkxZTdSDhCAP7OWfMt0iFLtn/view?usp=drivesdk',
+        },
+    ],
+};
 
 const Category = () => {
     const [activeCard, setActiveCard] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [modalComp, setModalComp] = useState(null);
 
+    // Handler for opening the popup for a specific competition
+    const handleJoinBattle = (comp) => {
+        setModalComp(comp);
+        setShowModal(true);
+    };
+
+    // Items for the popup button (customized per competition)
+    const getPopupItems = (comp) => {
+        if (!comp) return [];
+        return popupItemsByCompId[comp.id] || [];
+    };
+
+    // Patch CompetitionCard to render the cta prop
+    const CompetitionCardPatchedRender = memo(function CompetitionCardPatchedRender({ comp, index, activeCard, setActiveCard }) {
+        return (
+            <div
+                key={comp.id}
+                className="group relative rounded-3xl p-8 transition-all duration-500 hover:scale-105 hover:border-white/20 cursor-pointer border border-white/10"
+                onMouseEnter={() => setActiveCard(comp.id)}
+                onMouseLeave={() => setActiveCard(null)}
+                style={{
+                    animation: `slideInUp 0.8s ease-out ${index * 0.2}s both`,
+                    background: comp.bgGradient,
+                    boxShadow: '0 8px 32px 0 rgba(31,41,55,0.18), 0 1.5px 8px 0 rgba(255, 107, 0, 0.08)'
+                }}
+            >
+                {/* Card Glow Effect */}
+                <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity duration-500 pointer-events-none"
+                    style={{ background: comp.gradient }}
+                ></div>
+
+                {/* Floating Badge */}
+                <div className="absolute -top-4 -right-4 z-10">
+                    <div
+                        className="px-4 py-2 rounded-2xl shadow-xl transform rotate-12 group-hover:rotate-0 transition-transform duration-300"
+                        style={{ background: comp.gradient, color: '#fff' }}
+                    >
+                        <span className="text-sm font-bold">{comp.level}</span>
+                    </div>
+                </div>
+
+                {/* Icon Container */}
+                <div
+                    className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 shadow-2xl group-hover:shadow-3xl group-hover:scale-110 transition-all duration-300 relative overflow-hidden"
+                    style={{ background: comp.iconBg }}
+                >
+                    {/* Icon Shine Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-y-12 translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+                    <div className="relative z-10">{comp.icon}</div>
+                </div>
+
+                {/* Content */}
+                <div className="space-y-4">
+                    <div>
+                        <h3
+                            className="text-2xl font-bold mb-1 group-hover:text-[#fff6b7] transition-colors"
+                            style={{ color: '#fff' }}
+                        >
+                            {comp.title}
+                        </h3>
+                        <p
+                            className="text-sm font-semibold bg-clip-text text-transparent"
+                            style={{
+                                background: comp.gradient,
+                                WebkitBackgroundClip: 'text',
+                                backgroundClip: 'text'
+                            }}
+                        >
+                            {comp.subtitle}
+                        </p>
+                    </div>
+
+                    <p className="leading-relaxed text-sm" style={{ color: '#fff7ed' }}>{comp.description}</p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                        {comp.tags.map((tag, i) => (
+                            <span
+                                key={i}
+                                className="px-3 py-1 text-xs rounded-full border"
+                                style={{ background: '#2d2d2d', color: '#ffe259', borderColor: '#ffb347' }}
+                            >
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+
+                    {/* CTA Button (from prop) */}
+                    <button
+                        type="button"
+                        className="block w-full text-center py-4 px-6 font-bold rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group/btn"
+                        style={{ background: comp.gradient, color: '#fff' }}
+                        onClick={() => handleJoinBattle(comp)}
+                    >
+                        {/* Overlay glassmorphism hover konsisten semua card (seperti design poster) */}
+                        <div className="absolute inset-0 pointer-events-none transition-all duration-300 group-hover/btn:opacity-100 opacity-0 rounded-2xl backdrop-blur-md border border-white/20" style={{ background: 'rgba(255,255,255,0.22)' }}></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 translate-x-[-100%] group-hover/btn:translate-x-[200%] transition-transform duration-1000"></div>
+                        <span className="relative z-10 flex items-center justify-center gap-2">
+                            Join Battle
+                            <svg width="16" height="16" fill="none" viewBox="0 0 16 16" className="transition-transform group-hover/btn:translate-x-1">
+                                <path d="M4 8h8M10 6l2 2-2 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+
+                {/* Active Card Indicator */}
+                {activeCard === comp.id && (
+                    <div className="absolute inset-0 border-2 border-white/30 rounded-3xl pointer-events-none animate-pulse"></div>
+                )}
+            </div>
+        );
+    });
+
+    // Render
     return (
         <section
             id="category"
@@ -208,13 +248,13 @@ const Category = () => {
 
             {/* Content wrapper */}
             <div className="relative z-10 container mx-auto px-6">
-                {/* Header moved to top */}
+                {/* Header at the top */}
                 <div className="w-full">
                     <Header />
                 </div>
                 <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto z-10 relative">
                     {competitions.map((comp, index) => (
-                        <CompetitionCard
+                        <CompetitionCardPatchedRender
                             key={comp.id}
                             comp={comp}
                             index={index}
@@ -225,6 +265,16 @@ const Category = () => {
                 </div>
                 <BottomCTA />
             </div>
+
+            {/* Popup Modal */}
+            {showModal && modalComp && (
+                <PopupButton
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    label=""
+                    items={getPopupItems(modalComp)}
+                />
+            )}
 
             {/* Extra Animations */}
             <style>{`
@@ -325,7 +375,7 @@ const Header = memo(() => (
                             textShadow: '0 2px 24px #d46fff66, 0 1px 0 #fff6b7',
                         }}
                     >
-                        BATTLE ARENA
+                        Competition category
                     </span>
                 </h1>
                 {/* Animated underline accent */}

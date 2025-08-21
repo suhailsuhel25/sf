@@ -3,25 +3,29 @@ import '../App.css';
 
 // Navigation links data
 const NAV_LINKS = [
-  { href: '/', label: 'Home', icon: (
+  {
+    href: '/', label: 'Home', icon: (
       <svg className="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
       </svg>
     )
   },
-  { href: '#about', label: 'About', icon: (
+  {
+    href: '#about', label: 'About', icon: (
       <svg className="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     )
   },
-  { href: '#category', label: 'Category', icon: (
+  {
+    href: '#category', label: 'Category', icon: (
       <svg className="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
       </svg>
     )
   },
-  { href: '#timeline', label: 'Timeline', icon: (
+  {
+    href: '#timeline', label: 'Timeline', icon: (
       <svg className="w-5 h-5 mr-3 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
       </svg>
@@ -32,15 +36,15 @@ const NAV_LINKS = [
 // Modal competition links
 const COMPETITION_LINKS = [
   {
-    href: "https://drive.google.com/file/d/1rV78hl8eH_G8Xsesh2GYKeZdtcZ1PWE8/view",
+    href: "https://bit.ly/WebDevelopment_SwitchFest2025",
     label: "Web Development"
   },
   {
-    href: "https://drive.google.com/file/d/1rZTCCTislsKIVzmgR4KA3HhXURgdvR3c/view",
+    href: "https://bit.ly/UIUX-Design_SwitchFest2025",
     label: "UI/UX Design"
   },
   {
-    href: "https://drive.google.com/file/d/1raJxSQHiBYjSplEpzvC3qS4P0AMl1dC8/view",
+    href: "https://bit.ly/Poster_SwitchFest2025",
     label: "Design Poster"
   }
 ];
@@ -211,9 +215,8 @@ const Navbar = () => {
     <Fragment>
       <nav
         ref={containerRef}
-        className={`navbar-gradient px-4 lg:px-20 py-2 lg:py-6 h-16 lg:h-16 shadow-lg border-b-4 border-yellow-400/60 flex items-center justify-between fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${
-          showNavbar ? 'translate-y-0' : '-translate-y-full'
-        }`}
+        className={`navbar-gradient px-4 lg:px-20 py-2 lg:py-6 h-16 lg:h-16 shadow-lg border-b-4 border-yellow-400/60 flex items-center justify-between fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${showNavbar ? 'translate-y-0' : '-translate-y-full'
+          }`}
         style={{ willChange: 'transform', ...orbitronFont }}
       >
         {/* Logo */}
