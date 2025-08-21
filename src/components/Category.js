@@ -1,78 +1,5 @@
 
-import { useState, useEffect, memo } from 'react';
-
-// Custom hook for animated particles
-function useParticles(count) {
-    const [particles, setParticles] = useState([]);
-    useEffect(() => {
-        const generateParticles = () =>
-            Array.from({ length: count }, (_, i) => ({
-                id: i,
-                x: Math.random() * 100,
-                y: Math.random() * 100,
-                size: Math.random() * 4 + 2,
-                speed: Math.random() * 2 + 1,
-                opacity: Math.random() * 0.5 + 0.3
-            }));
-        setParticles(generateParticles());
-        const interval = setInterval(() => {
-            setParticles(prev =>
-                prev.map(p => ({
-                    ...p,
-                    y: p.y > 100 ? -5 : p.y + p.speed * 0.1
-                }))
-            );
-        }, 50);
-        return () => clearInterval(interval);
-    }, [count]);
-    return particles;
-}
-
-const ParticleBackground = memo(({ particles }) => (
-    <>
-        {/* Grid Pattern */}
-        <div
-            className="absolute inset-0"
-            style={{
-                background:
-                    'linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px)',
-                backgroundSize: '50px 50px'
-            }}
-        ></div>
-        {/* Floating Particles */}
-        {particles.map(particle => (
-            <div
-                key={particle.id}
-                className="absolute w-1 h-1"
-                style={{
-                    left: `${particle.x}%`,
-                    top: `${particle.y}%`,
-                    opacity: particle.opacity,
-                    background: 'linear-gradient(135deg, #ffb347, #ff6a00)',
-                    borderRadius: '9999px',
-                    animation: 'pulse 2s infinite',
-                    animationDelay: `${particle.id * 0.1}s`
-                }}
-            />
-        ))}
-        {/* Gradient Orbs */}
-        <div
-            className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full filter blur-3xl animate-pulse"
-            style={{
-                background: 'radial-gradient(circle at 30% 30%, #ff9800 0%, #1f2937 100%)',
-                opacity: 0.10
-            }}
-        ></div>
-        <div
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full filter blur-3xl animate-pulse"
-            style={{
-                background: 'radial-gradient(circle at 70% 70%, #ff2eb2 0%, #1f2937 100%)',
-                opacity: 0.08,
-                animationDelay: '2s'
-            }}
-        ></div>
-    </>
-));
+import { useState, memo } from 'react';
 
 // Competition card as a memoized component
 const CompetitionCard = memo(function CompetitionCard({ comp, index, activeCard, setActiveCard }) {
@@ -165,7 +92,7 @@ const CompetitionCard = memo(function CompetitionCard({ comp, index, activeCard,
                     <span className="relative z-10 flex items-center justify-center gap-2">
                         Join Battle
                         <svg width="16" height="16" fill="none" viewBox="0 0 16 16" className="transition-transform group-hover/btn:translate-x-1">
-                            <path d="M8 1l3 3-3 3M11 4H1M8 9l3 3-3 3M11 12H1" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                            <path d="M8 1l3 3-3 3M11 4H1M8 9l3 3-3 3M11 12H1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                         </svg>
                     </span>
                 </a>
@@ -178,8 +105,6 @@ const CompetitionCard = memo(function CompetitionCard({ comp, index, activeCard,
         </div>
     );
 });
-
-const PARTICLE_COUNT = 20;
 
 // Data kompetisi
 const competitions = [
@@ -198,21 +123,21 @@ const competitions = [
             // Website/Browser window icon (SVG diperbesar)
             <svg width="70" height="70" fill="none" viewBox="0 0 32 32">
                 {/* Outer browser window */}
-                <rect x="4" y="8" width="24" height="16" rx="2.5" fill="#ffb347" opacity="0.18"/>
-                <rect x="6" y="10" width="20" height="12" rx="1.5" fill="#ff9800"/>
+                <rect x="4" y="8" width="24" height="16" rx="2.5" fill="#ffb347" opacity="0.18" />
+                <rect x="6" y="10" width="20" height="12" rx="1.5" fill="#ff9800" />
                 {/* Browser top bar */}
                 <rect x="6" y="10" width="20" height="3" rx="1.5" fill="#ffb347" />
                 {/* Browser buttons */}
-                <circle cx="8.5" cy="11.5" r="0.7" fill="#fff" opacity="0.7"/>
-                <circle cx="11" cy="11.5" r="0.7" fill="#fff" opacity="0.7"/>
-                <circle cx="13.5" cy="11.5" r="0.7" fill="#fff" opacity="0.7"/>
+                <circle cx="8.5" cy="11.5" r="0.7" fill="#fff" opacity="0.7" />
+                <circle cx="11" cy="11.5" r="0.7" fill="#fff" opacity="0.7" />
+                <circle cx="13.5" cy="11.5" r="0.7" fill="#fff" opacity="0.7" />
                 {/* Website content: header */}
-                <rect x="9" y="15" width="14" height="2" rx="1" fill="#fff" opacity="0.9"/>
+                <rect x="9" y="15" width="14" height="2" rx="1" fill="#fff" opacity="0.9" />
                 {/* Website content: lines */}
-                <rect x="9" y="18.5" width="10" height="1.2" rx="0.6" fill="#fff" opacity="0.7"/>
-                <rect x="9" y="21" width="7" height="1.2" rx="0.6" fill="#fff" opacity="0.5"/>
+                <rect x="9" y="18.5" width="10" height="1.2" rx="0.6" fill="#fff" opacity="0.7" />
+                <rect x="9" y="21" width="7" height="1.2" rx="0.6" fill="#fff" opacity="0.5" />
                 {/* Website content: image placeholder */}
-                <rect x="21" y="18.5" width="2" height="3.7" rx="1" fill="#fff" opacity="0.5"/>
+                <rect x="21" y="18.5" width="2" height="3.7" rx="1" fill="#fff" opacity="0.5" />
             </svg>
         )
     },
@@ -229,12 +154,12 @@ const competitions = [
         // Icon: UI/UX (layout, pen, or similar)
         icon: (
             <svg width="70" height="70" fill="none" viewBox="0 0 32 32">
-                <rect x="8" y="6" width="16" height="20" rx="3" fill="#ffe259" opacity="0.2"/>
-                <rect x="10" y="8" width="12" height="16" rx="2" fill="#fff6b7"/>
-                <rect x="12" y="10" width="8" height="4" rx="1" fill="#fff"/>
-                <rect x="12" y="16" width="6" height="1.5" rx="0.75" fill="#ffe259"/>
+                <rect x="8" y="6" width="16" height="20" rx="3" fill="#ffe259" opacity="0.2" />
+                <rect x="10" y="8" width="12" height="16" rx="2" fill="#fff6b7" />
+                <rect x="12" y="10" width="8" height="4" rx="1" fill="#fff" />
+                <rect x="12" y="16" width="6" height="1.5" rx="0.75" fill="#ffe259" />
                 <circle cx="16" cy="22" r="2" fill="#ffe259" />
-                <rect x="14.5" y="20.5" width="3" height="3" rx="1.5" stroke="#ffb347" strokeWidth="1"/>
+                <rect x="14.5" y="20.5" width="3" height="3" rx="1.5" stroke="#ffb347" strokeWidth="1" />
             </svg>
         )
     },
@@ -251,12 +176,12 @@ const competitions = [
         // Icon: Poster (image, frame, or similar)
         icon: (
             <svg width="70" height="70" fill="none" viewBox="0 0 32 32">
-                <rect x="10" y="4" width="12" height="24" rx="2" fill="#ff2eb2" opacity="0.2"/>
-                <rect x="11" y="6" width="10" height="20" rx="1" fill="#ff1749"/>
-                <rect x="13" y="8" width="6" height="8" rx="1" fill="#fff"/>
-                <rect x="13" y="18" width="6" height="2" rx="1" fill="#ff2eb2"/>
-                <rect x="13" y="22" width="6" height="2" rx="1" fill="#ff2eb2"/>
-                <circle cx="16" cy="12" r="1.5" fill="#ff2eb2"/>
+                <rect x="10" y="4" width="12" height="24" rx="2" fill="#ff2eb2" opacity="0.2" />
+                <rect x="11" y="6" width="10" height="20" rx="1" fill="#ff1749" />
+                <rect x="13" y="8" width="6" height="8" rx="1" fill="#fff" />
+                <rect x="13" y="18" width="6" height="2" rx="1" fill="#ff2eb2" />
+                <rect x="13" y="22" width="6" height="2" rx="1" fill="#ff2eb2" />
+                <circle cx="16" cy="12" r="1.5" fill="#ff2eb2" />
             </svg>
         )
     }
@@ -265,23 +190,28 @@ const competitions = [
 
 const Category = () => {
     const [activeCard, setActiveCard] = useState(null);
-    const particles = useParticles(PARTICLE_COUNT);
 
     return (
         <section
             id="category"
-            className="min-h-screen relative overflow-hidden flex items-center py-10"
-            style={{
-                background: 'linear-gradient(135deg, #1f2937 0%, #232323 60%, #ff6a00 100%)'
-            }}
+            className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden"
         >
-            {/* Animated Background */}
-            <div className="absolute inset-0">
-                <ParticleBackground particles={particles} />
-            </div>
+            {/* Animated Gradient Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-[#1c1c1c] to-[#111] animate-gradient-slow bg-[length:200%_200%]" />
 
+            {/* Glow accents */}
+            <div className="absolute top-1/3 -left-40 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-orange-500/30 via-pink-500/20 to-purple-500/30 blur-3xl animate-pulse-slow" />
+            <div className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-pink-400/20 via-purple-500/30 to-orange-400/20 blur-3xl animate-pulse-slower" />
 
-            <div className="container mx-auto px-6 relative">
+            {/* Grid overlay */}
+            <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+            {/* Content wrapper */}
+            <div className="relative z-10 container mx-auto px-6">
+                {/* Header moved to top */}
+                <div className="w-full">
+                    <Header />
+                </div>
                 <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto z-10 relative">
                     {competitions.map((comp, index) => (
                         <CompetitionCard
@@ -294,29 +224,27 @@ const Category = () => {
                     ))}
                 </div>
                 <BottomCTA />
-                {/* Header moved to bottom with lowest z-index */}
-                <div className="absolute left-0 right-0 bottom-0 z-0 w-full">
-                    <Header />
-                </div>
             </div>
 
-            <style jsx>{`
-                @keyframes slideInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(60px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
+            {/* Extra Animations */}
+            <style>{`
+                @keyframes gradient-slow {
+                  0% { background-position: 0% 50%; }
+                  50% { background-position: 100% 50%; }
+                  100% { background-position: 0% 50%; }
                 }
-                .shadow-3xl {
-                    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+                .animate-gradient-slow {
+                  animation: gradient-slow 18s ease infinite;
                 }
-                @keyframes pulse {
-                    0%, 100% { opacity: 0.7; }
-                    50% { opacity: 1; }
+                @keyframes pulse-slow {
+                  0%, 100% { opacity: 0.4; transform: scale(1); }
+                  50% { opacity: 0.7; transform: scale(1.05); }
+                }
+                .animate-pulse-slow {
+                  animation: pulse-slow 8s ease-in-out infinite;
+                }
+                .animate-pulse-slower {
+                  animation: pulse-slow 12s ease-in-out infinite;
                 }
             `}</style>
         </section>
@@ -325,21 +253,119 @@ const Category = () => {
 
 // Header as a separate component
 const Header = memo(() => (
-        <div className="text-center mb-8">
-                            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-pink-300 bg-white/10 shadow-md mb-4">
-                                <svg className="w-4 h-4 text-pink-400 animate-pulse" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 17.75l-6.172 3.245 1.179-6.873L2 9.755l6.914-1.004L12 2.5l3.086 6.251L22 9.755l-5.007 4.367 1.179 6.873z"/></svg>
-                                <span className="text-base font-semibold tracking-wide text-pink-400">SWITCHFEST 2025</span>
-                            </div>
-                            <h2
-                                className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-orange-400 via-pink-400 to-purple-400 bg-clip-text text-transparent drop-shadow-lg mb-2 tracking-tight"
-                                style={{ WebkitBackgroundClip: "text", backgroundClip: "text" }}
-                            >
-                                BATTLE ARENA
-                            </h2>
-                            <p className="text-lg max-w-2xl mx-auto leading-relaxed text-pink-100/90">
-                                Pilih kategori lomba dan buktikan kemampuanmu di arena kompetisi terbesar tahun ini
-                            </p>
+    <div
+        className="relative w-full text-center mb-8 flex-shrink-0"
+        style={{
+            marginTop: '3.5rem',
+        }}
+    >
+        <div className="flex flex-col items-center gap-2">
+            {/* Judul Utama */}
+            <div className="relative flex flex-col items-center w-full">
+                {/* Decorative SVG background for the title */}
+                <svg
+                    width="380"
+                    height="60"
+                    viewBox="0 0 380 60"
+                    fill="none"
+                    className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 pointer-events-none select-none"
+                    style={{
+                        zIndex: 0,
+                        filter: 'blur(2px) drop-shadow(0 4px 32px #ffb34766)',
+                        opacity: 0.7,
+                    }}
+                >
+                    <ellipse
+                        cx="190"
+                        cy="30"
+                        rx="170"
+                        ry="18"
+                        fill="url(#paint0_radial_heroTitle)"
+                    />
+                    <defs>
+                        <radialGradient
+                            id="paint0_radial_heroTitle"
+                            cx="0"
+                            cy="0"
+                            r="1"
+                            gradientTransform="translate(190 30) scale(170 18)"
+                            gradientUnits="userSpaceOnUse"
+                        >
+                            <stop stopColor="#ffe259" stopOpacity="0.7" />
+                            <stop offset="0.5" stopColor="#ffb347" stopOpacity="0.3" />
+                            <stop offset="1" stopColor="#f6416c" stopOpacity="0.1" />
+                        </radialGradient>
+                    </defs>
+                </svg>
+                <h1
+                    className="uppercase font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight relative z-10"
+                    style={{
+                        fontFamily: "'Orbitron', 'Montserrat', sans-serif",
+                        background: 'linear-gradient(90deg, #ff6a00 0%, #ffb347 30%, #f6416c 70%, #d46fff 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                        textShadow: '0 4px 32px #ffb34755, 0 1px 0 #fff6b7',
+                        letterSpacing: '0.08em',
+                        marginBottom: '0.1em',
+                        fontStyle: 'normal',
+                        fontWeight: 900,
+                        marginTop: '-0.2em',
+                        lineHeight: 1.1,
+                        textTransform: 'uppercase',
+                        transition: 'all 0.3s cubic-bezier(.4,2,.6,1)',
+                        filter: 'drop-shadow(0 2px 16px #f6416c33)',
+                    }}
+                >
+                    <span
+                        style={{
+                            display: 'inline-block',
+                            transform: 'skewX(-8deg) scaleY(1.08)',
+                            letterSpacing: '0.12em',
+                            textShadow: '0 2px 24px #d46fff66, 0 1px 0 #fff6b7',
+                        }}
+                    >
+                        BATTLE ARENA
+                    </span>
+                </h1>
+                {/* Animated underline accent */}
+                <div
+                    className="w-32 h-2 rounded-full mt-1 mb-2"
+                    style={{
+                        background: 'linear-gradient(90deg, #ffb347 0%, #f6416c 100%)',
+                        boxShadow: '0 2px 16px #ffb34755, 0 0 8px #d46fff55',
+                        animation: 'pulse-underline 2.5s infinite alternate',
+                        opacity: 0.85,
+                    }}
+                />
+                <style>
+                    {`
+                      @keyframes pulse-underline {
+                        0% { transform: scaleX(0.85); opacity: 0.7; }
+                        100% { transform: scaleX(1.15); opacity: 1; }
+                      }
+                    `}
+                </style>
+            </div>
+            {/* Subtitle */}
+            <div
+                className="text-base sm:text-lg md:text-xl font-semibold"
+                style={{
+                    color: '#fffbe6',
+                    textShadow: '0 2px 12px #ffb34733',
+                    maxWidth: '700px',
+                    margin: '0 auto',
+                    lineHeight: 1.5,
+                    fontFamily: "'Montserrat', 'Orbitron', sans-serif",
+                    fontWeight: 600,
+                    fontStyle: 'normal',
+                    letterSpacing: '0.01em',
+                }}
+            >
+                Pilih kategori lomba dan buktikan kemampuanmu di arena kompetisi terbesar tahun ini
+            </div>
         </div>
+    </div>
 ));
 
 // Bottom CTA as a separate component

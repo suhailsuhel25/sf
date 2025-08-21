@@ -101,10 +101,19 @@ const ParallaxSponsors = () => {
         <div
           className="relative w-full text-center mb-6 md:mb-8 flex-shrink-0"
           style={{
-            marginTop: '3.5rem', // Tambahkan jarak atas agar judul tidak kepotong
+            marginTop: '1.5rem', // Lebih ke atas di mobile, tetap 3.5rem di md ke atas
           }}
         >
-          <div className="flex flex-col items-center gap-2">
+          <style>
+            {`
+              @media (min-width: 768px) {
+                .sponsor-title-margin {
+                  margin-top: 3.5rem !important;
+                }
+              }
+            `}
+          </style>
+          <div className="flex flex-col items-center gap-2 sponsor-title-margin">
             {/* Judul Utama */}
             <div className="relative flex flex-col items-center w-full">
               {/* Decorative SVG background for the title */}
