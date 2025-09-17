@@ -273,8 +273,8 @@ const HeroActions = memo(({ setShowDaftar, setShowJuklak }) => {
 
 const CountdownTimer = memo(() => {
   // Tanggal mulai dan akhir (WIB = UTC+7)
-  const startDateStr = '2025-08-21T00:00:00+07:00';
-  const endDateStr = '2025-09-07T23:59:59+07:00';
+  const startDateStr = '2025-09-08T00:00:00+07:00';
+  const endDateStr = '2025-10-05T23:59:59+07:00';
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -384,7 +384,7 @@ const CountdownTimer = memo(() => {
   if (status === 'before') {
     titleText = 'Pendaftaran Batch 1 dibuka dalam:';
   } else if (status === 'running') {
-    titleText = 'Pendaftaran Batch 1 sedang berlangsung!';
+    titleText = 'Pendaftaran Batch 2 sedang berlangsung!';
   } else {
     titleText = 'Pendaftaran Batch 1 telah ditutup';
   }
