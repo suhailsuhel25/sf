@@ -274,7 +274,7 @@ const HeroActions = memo(({ setShowDaftar, setShowJuklak }) => {
 const CountdownTimer = memo(() => {
   // Tanggal mulai dan akhir (WIB = UTC+7)
   const startDateStr = '2025-09-08T00:00:00+07:00';
-  const endDateStr = '2025-10-05T23:59:59+07:00';
+  const endDateStr = '2025-12-05T23:59:59+07:00';
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
